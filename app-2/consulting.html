@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting — eHive</title>
+<meta name="description" content="Six proprietary consulting products — from a three-hour clarity sprint to a 90-day growth engagement. The rigor of strategy consulting, the creativity of a design studio.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 27 9.5v13L16 29 5 22.5v-13z' fill='none' stroke='%23B8862E' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23B8862E'/%3E%3C/svg%3E">
+<style>
+/* eHive design system (locked). Consulting pillar — blueprint Section 4.
+   Product facts sourced from the six eHive product briefs (client-supplied). */
+:root{
+  --navy:#1A1A2E; --navy-2:#151527; --navy-3:#0C0C16;
+  --gold:#B8862E; --gold-2:#D9AE5F; --gold-soft:rgba(184,134,46,.16);
+  --ivory:#F7F4ED; --ivory-2:#EFEBE0;
+  --ink:#23233C; --mut:#61617C;
+  --line-l:rgba(26,26,46,.14); --line-d:rgba(247,244,237,.13);
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:Calibri,'Segoe UI',Candara,'Helvetica Neue',Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(5rem,9vw,8rem);
+  --max:1220px; --narrow:820px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:var(--sans);background:var(--navy-3);color:var(--ivory);
+  font-size:1.0625rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--gold);color:var(--navy-3)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--navy-3)}
+::-webkit-scrollbar-thumb{background:#3a3a52;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;top:-60px;left:1rem;z-index:200;background:var(--gold);color:var(--navy-3);
+  padding:.6rem 1.1rem;border-radius:2px;transition:top .3s;font-size:.9rem}
+.skip:focus{top:1rem}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:clamp(1.25rem,4.5vw,3rem)}
+.narrow{max-width:var(--narrow);margin:0 auto;padding-inline:clamp(1.25rem,4.5vw,3rem)}
+section{position:relative}
+.eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.4rem;display:flex;align-items:center;gap:.9rem}
+.eyebrow::before{content:"";width:2.2rem;height:1px;background:var(--gold);opacity:.7}
+.pad{padding-block:var(--pad)}
+.light{background:var(--ivory);color:var(--ink)}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.6vw,2.9rem);
+  line-height:1.2;letter-spacing:-.01em}
+.lede{color:var(--mut);font-size:1.1rem;max-width:62ch}
+.anim .reveal{opacity:0;transform:translateY(36px);filter:blur(7px);
+  transition:opacity 1.05s var(--ease),transform 1.05s var(--ease),filter 1.05s var(--ease);
+  transition-delay:var(--d,0s)}
+.anim .reveal.in-view{opacity:1;transform:none;filter:none}
+
+.btn{display:inline-flex;align-items:center;gap:.65rem;font-weight:700;
+  font-size:.92rem;letter-spacing:.05em;padding:.95rem 1.9rem;border-radius:2px;cursor:pointer;
+  border:1px solid transparent;transition:all .38s var(--ease)}
+.btn .arr{transition:transform .38s var(--ease)}
+.btn:hover .arr{transform:translateX(5px)}
+.btn-primary{background:var(--gold);color:#10101E}
+.btn-primary:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(184,134,46,.55)}
+.btn-ghost{background:transparent;color:var(--gold);border-color:rgba(184,134,46,.55)}
+.btn-ghost:hover{background:var(--gold-soft);border-color:var(--gold);transform:translateY(-2px)}
+.btn-ghost.on-dark{color:var(--gold-2)}
+.btn-sm{padding:.62rem 1.3rem;font-size:.85rem}
+
+.site-nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .5s var(--ease),border-color .5s;
+  border-bottom:1px solid transparent}
+.site-nav.scrolled{background:rgba(12,12,22,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--line-d)}
+.site-nav nav{max-width:1360px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);height:84px;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.brand{display:flex;align-items:center}
+.brand img{height:26px;width:auto}
+.nav-links{display:flex;align-items:center;gap:2.4rem;list-style:none;margin:0}
+.nav-links a{font-size:.93rem;letter-spacing:.04em;color:rgba(247,244,237,.82);
+  transition:color .3s;position:relative;padding-block:.4rem}
+.nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.nav-links a:not(.btn):hover{color:var(--gold-2)}
+.nav-links a:not(.btn):hover::after{transform:scaleX(1);transform-origin:left}
+.nav-links a[aria-current="page"]{color:var(--gold-2)}
+.nav-links a[aria-current="page"]::after{transform:scaleX(1)}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;position:relative;z-index:110}
+.nav-toggle span{position:absolute;left:10px;width:24px;height:1.6px;background:var(--ivory);transition:all .4s var(--ease)}
+.nav-toggle span:nth-child(1){top:16px}.nav-toggle span:nth-child(2){top:22px}.nav-toggle span:nth-child(3){top:28px}
+.menu-open .nav-toggle span:nth-child(1){top:22px;transform:rotate(45deg);background:var(--gold)}
+.menu-open .nav-toggle span:nth-child(2){opacity:0}
+.menu-open .nav-toggle span:nth-child(3){top:22px;transform:rotate(-45deg);background:var(--gold)}
+
+.page-hero{background:radial-gradient(110% 100% at 50% 0%,#1e1e36 0%,var(--navy-2) 52%,var(--navy-3) 100%);
+  color:var(--ivory);padding:11.5rem 0 6.5rem;overflow:hidden}
+.page-hero .lattice-bg{position:absolute;inset:0;opacity:.4;pointer-events:none}
+.crumbs{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,244,237,.5);
+  margin-bottom:2.4rem;display:flex;gap:.8rem;align-items:center;position:relative;z-index:1}
+.crumbs a{color:rgba(247,244,237,.65);transition:color .3s}
+.crumbs a:hover{color:var(--gold-2)}
+.crumbs i{font-style:normal;color:var(--gold)}
+.page-hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5.2vw,4.3rem);
+  line-height:1.12;letter-spacing:-.015em;max-width:20ch;position:relative;z-index:1}
+.page-hero h1 em{font-style:italic;color:var(--gold-2)}
+.page-hero .sub{margin-top:1.8rem;font-size:clamp(1.05rem,1.6vw,1.25rem);color:rgba(247,244,237,.78);
+  max-width:58ch;position:relative;z-index:1}
+
+/* ---------- methodology strip ---------- */
+.method{background:var(--navy-3);border-block:1px solid var(--line-d)}
+.method .wrap{display:flex;align-items:center;gap:2rem;padding-block:2.6rem}
+.method svg{flex:none}
+.method p{font-family:var(--serif);font-size:clamp(1.05rem,1.8vw,1.3rem);line-height:1.55;color:rgba(247,244,237,.85)}
+.method p b{color:var(--gold-2);font-weight:700}
+
+/* ---------- product journey ---------- */
+.products{background:var(--ivory)}
+.journey-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:1.5rem;margin-bottom:4rem}
+.journey-note{font-size:.9rem;color:var(--mut);max-width:34ch}
+.plist{position:relative;display:flex;flex-direction:column;gap:1.6rem}
+.plist::before{content:"";position:absolute;left:44px;top:2rem;bottom:2rem;width:1px;background:var(--line-l)}
+.product{position:relative;display:grid;grid-template-columns:90px 1fr 300px;gap:2.2rem;
+  background:#fff;border:1px solid var(--line-l);border-radius:3px;padding:2.4rem 2.4rem 2.2rem;
+  transition:transform .5s var(--ease),box-shadow .5s,border-color .5s}
+.product:hover{transform:translateY(-5px);border-color:rgba(184,134,46,.4);
+  box-shadow:0 26px 54px -28px rgba(26,26,46,.25)}
+.p-node{position:relative;z-index:1}
+.p-num{width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid rgba(184,134,46,.55);
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--gold);
+  font-size:1.05rem;transition:background .4s,box-shadow .4s}
+.product:hover .p-num{background:var(--gold-soft);box-shadow:0 0 0 7px rgba(184,134,46,.08)}
+.p-format{margin-top:1rem;font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mut);line-height:1.5;text-align:center;width:52px}
+.p-body h3{font-family:var(--serif);font-weight:400;font-size:1.65rem;letter-spacing:-.01em;margin-bottom:.3rem}
+.p-tag{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.05rem;margin-bottom:1.1rem}
+.p-desc{color:var(--mut);font-size:1rem;line-height:1.7;max-width:56ch}
+.p-best{margin-top:1.1rem;font-size:.9rem;color:var(--ink)}
+.p-best b{color:var(--gold);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;margin-right:.5rem}
+.p-side{border-left:1px solid var(--line-l);padding-left:2.2rem;display:flex;flex-direction:column;gap:.9rem}
+.p-price{font-family:var(--serif);font-size:1.5rem;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.p-price small{display:block;font-family:var(--sans);font-size:.78rem;color:var(--mut);margin-top:.35rem;letter-spacing:.02em}
+.p-side .btn{justify-content:center;margin-top:.4rem}
+.p-explore{margin-top:auto;font-size:.88rem;font-weight:700;letter-spacing:.04em;color:var(--navy);
+  display:inline-flex;gap:.5rem;align-items:center;transition:color .3s}
+.p-explore .arr{color:var(--gold);transition:transform .38s var(--ease)}
+.p-explore:hover{color:var(--gold)}
+.p-explore:hover .arr{transform:translateX(5px)}
+.p-side .talk{color:var(--mut);font-size:.8rem;text-align:center;margin-top:-.2rem}
+</style>
+<style>
+
+/* cinematic image banner (chapter break) */
+.img-banner{position:relative;height:clamp(340px,48vw,600px);overflow:hidden;margin:0}
+.img-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  animation:kb 34s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1) translateY(0)}to{transform:scale(1.07) translateY(-1.5%)}}
+.img-banner .ib-overlay{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(12,12,22,.6),rgba(12,12,22,.26) 45%,rgba(12,12,22,.64))}
+.img-banner figcaption{position:absolute;left:0;right:0;bottom:clamp(1.8rem,4vw,3rem);text-align:center;
+  font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,2.3vw,1.65rem);
+  color:rgba(247,244,237,.94);z-index:1;padding-inline:1.5rem}
+
+/* ---------- how engagements run ---------- */
+.process{background:var(--ivory-2)}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:2.2rem;position:relative;margin-top:3.4rem}
+.steps::before{content:"";position:absolute;top:26px;left:3%;width:94%;height:1px;background:var(--line-l)}
+.steps::after{content:"";position:absolute;top:26px;left:3%;width:94%;height:1px;background:var(--gold);z-index:0}
+.anim .steps::after{transform:scaleX(0);transform-origin:left;transition:transform 2s var(--ease) .3s}
+.anim .steps.draw::after{transform:scaleX(1)}
+.step{position:relative;padding-top:4.4rem}
+.step-num{position:absolute;top:0;left:0;width:53px;height:53px;border-radius:50%;background:var(--ivory-2);
+  border:1px solid rgba(184,134,46,.5);display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);color:var(--gold);font-size:1.05rem;z-index:1}
+.step h3{font-family:var(--serif);font-weight:400;font-size:1.22rem;line-height:1.35;margin-bottom:.7rem;letter-spacing:-.01em}
+.step p{color:var(--mut);font-size:.95rem;line-height:1.65}
+
+/* ---------- page cta / footer (shared) ---------- */
+.page-cta{background:linear-gradient(180deg,var(--navy-3),var(--navy));color:var(--ivory);text-align:center;overflow:hidden}
+.page-cta .lattice-bg{position:absolute;inset:0;opacity:.45;pointer-events:none}
+.page-cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.2vw,3.2rem);
+  letter-spacing:-.015em;margin-bottom:1.2rem}
+.page-cta .lede{margin:0 auto 2.6rem;color:rgba(247,244,237,.75)}
+.page-cta .cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;position:relative;z-index:1}
+
+footer{background:var(--navy-3);color:rgba(247,244,237,.72);border-top:1px solid var(--line-d)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:clamp(2.5rem,5vw,4.5rem);
+  padding-block:clamp(4rem,7vw,6rem)}
+.foot-brand img{width:150px;height:auto;margin-bottom:1.6rem}
+.foot-brand p{font-size:.95rem;line-height:1.75;color:rgba(247,244,237,.6);max-width:34ch}
+.foot-col h4{font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:1.5rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.foot-col a{font-size:.95rem;color:rgba(247,244,237,.72);transition:color .3s}
+.foot-col a:hover{color:var(--gold-2)}
+.foot-loc{font-size:.95rem;line-height:1.8;color:rgba(247,244,237,.72)}
+.foot-loc span{display:block;font-size:.82rem;color:rgba(247,244,237,.45);margin-top:.3rem}
+.news-form{display:flex;margin-top:1.4rem;border:1px solid var(--line-d);border-radius:2px;overflow:hidden}
+.news-form input{flex:1;min-width:0;background:rgba(247,244,237,.04);border:0;color:var(--ivory);
+  padding:.8rem 1rem;font-family:var(--sans);font-size:.92rem}
+.news-form input::placeholder{color:rgba(247,244,237,.4)}
+.news-form button{background:var(--gold);color:#10101E;border:0;padding:0 1.2rem;font-weight:700;
+  font-family:var(--sans);font-size:.88rem;cursor:pointer;transition:background .3s}
+.news-form button:hover{background:var(--gold-2)}
+.foot-bottom{border-top:1px solid var(--line-d);padding-block:1.8rem;display:flex;flex-wrap:wrap;
+  align-items:center;justify-content:space-between;gap:1.2rem;font-size:.85rem;color:rgba(247,244,237,.45)}
+.foot-legal{display:flex;gap:1.8rem}
+.foot-legal a{transition:color .3s}
+.foot-legal a:hover{color:var(--gold-2)}
+.socials{display:flex;gap:1rem}
+.socials a{width:38px;height:38px;border:1px solid var(--line-d);border-radius:50%;display:flex;
+  align-items:center;justify-content:center;color:rgba(247,244,237,.65);transition:all .35s var(--ease)}
+.socials a:hover{border-color:var(--gold);color:var(--gold-2);transform:translateY(-3px)}
+.socials svg{width:16px;height:16px}
+
+@media (max-width:1020px){
+  .product{grid-template-columns:1fr;gap:1.6rem}
+  .p-node{display:flex;align-items:center;gap:1.2rem}
+  .p-format{margin-top:0;width:auto;text-align:left}
+  .plist::before{display:none}
+  .p-side{border-left:0;padding-left:0;border-top:1px solid var(--line-l);padding-top:1.6rem}
+  .steps{grid-template-columns:repeat(2,1fr);gap:2.6rem 2.2rem}
+  .steps::before,.steps::after{display:none}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .nav-toggle{display:block}
+  .nav-links{position:fixed;inset:0;background:rgba(12,12,22,.97);backdrop-filter:blur(18px);
+    flex-direction:column;justify-content:center;gap:2.6rem;transform:translateY(-102%);
+    transition:transform .55s var(--ease);z-index:105}
+  .menu-open .nav-links{transform:translateY(0)}
+  .nav-links a{font-size:1.35rem;font-family:var(--serif)}
+  .nav-links .btn{font-family:var(--sans);font-size:1rem}
+  .steps{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:2.6rem}
+  .page-cta .cta-row .btn{width:100%;justify-content:center}
+  .page-cta .cta-row{flex-direction:column;max-width:380px;margin-inline:auto}
+  .method .wrap{flex-direction:column;align-items:flex-start;gap:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .anim .reveal{opacity:1;transform:none;filter:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-nav" id="siteNav">
+  <nav aria-label="Primary">
+    <a class="brand" href="index.html" aria-label="eHive — home">
+      <img src="assets/ehive-wordmark.png" alt="eHive" width="146" height="26">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="business-setup.html">Business Setup</a></li>
+      <li><a href="consulting.html" aria-current="page">Consulting</a></li>
+      <li><a href="circle.html">eHive Circle</a></li>
+      <!-- PLACEHOLDER: /login exists once the Member Portal ships (Stage 6) -->
+      <li><a href="#">Login</a></li>
+      <li><a class="btn btn-primary btn-sm" href="get-started.html">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ================= HERO (blueprint 4) ================= -->
+<section class="page-hero" aria-labelledby="page-h">
+  <svg class="lattice-bg" viewBox="0 0 1200 500" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#B8862E" stroke-width=".7" opacity=".3">
+      <path d="M100 260 260 150 430 230 590 110 770 210 940 130 1100 240"/>
+      <path d="M180 400 350 300 530 380 710 280 900 390 1070 310"/>
+      <path d="M260 150 350 300M430 230 530 380M590 110 710 280M770 210 900 390M940 130 1070 310M100 260 180 400"/>
+    </g>
+    <g fill="#D9AE5F" opacity=".8">
+      <circle cx="100" cy="260" r="2.5"/><circle cx="260" cy="150" r="3.5"/><circle cx="430" cy="230" r="2.5"/>
+      <circle cx="590" cy="110" r="4"/><circle cx="770" cy="210" r="2.5"/><circle cx="940" cy="130" r="3.5"/>
+      <circle cx="1100" cy="240" r="2.5"/><circle cx="350" cy="300" r="3.5"/><circle cx="710" cy="280" r="3.5"/>
+      <circle cx="900" cy="390" r="2.5"/><circle cx="1070" cy="310" r="3"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html">Home</a><i>·</i><span>Consulting</span></p>
+    <p class="eyebrow">Pillar 02 — Run · Scale</p>
+    <h1 id="page-h">The rigor of strategy consulting. <em>The creativity of a design studio.</em></h1>
+    <p class="sub">We borrow our discipline from the world&rsquo;s top strategy consultancies, and our
+      process from the world&rsquo;s best design studios — then build both into six focused products
+      for growing businesses.</p>
+  </div>
+</section>
+
+<!-- ================= METHODOLOGY STRIP (blueprint 4) ================= -->
+<section class="method" aria-label="How quality is built in">
+  <div class="wrap">
+    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" aria-hidden="true">
+      <path d="M23 4l16 9.2v18.4L23 40.8 7 31.6V13.2z" stroke="#B8862E" stroke-width="1.4"/>
+      <path d="M16 23.5l4.8 4.8L31 18.5" stroke="#D9AE5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <p class="reveal">Every engagement is led by a <b>vetted specialist</b> and reviewed by
+      <b>eHive&rsquo;s core team</b> before it reaches you — quality control built in, not bolted on.</p>
+  </div>
+</section>
+
+<!-- chapter image: prism — rigor refracted into creativity (AI-generated brand art) -->
+<figure class="img-banner">
+  <img src="assets/img/img-consulting.jpg" alt="A glass prism refracting a beam of golden light into precise geometric lines">
+  <div class="ib-overlay" aria-hidden="true"></div>
+  <figcaption>Rigor, then creativity.</figcaption>
+</figure>
+
+<!-- ================= THE SIX PRODUCTS (blueprint 4) ================= -->
+<section class="products light" id="products" aria-labelledby="products-h">
+  <div class="wrap pad">
+    <div class="journey-head">
+      <div>
+        <p class="eyebrow reveal">The products</p>
+        <h2 class="h2 reveal" style="--d:.08s" id="products-h">Six products. One arc.</h2>
+      </div>
+      <p class="journey-note reveal" style="--d:.16s">Sequenced by where a founder typically starts.
+        Each stands alone — and they compound.</p>
+    </div>
+
+    <div class="plist">
+      <!-- 01 Clarity Sprint — product page: /consulting/clarity-sprint (Stage 4, follows) -->
+      <article class="product reveal" style="--d:.05s" id="clarity-sprint">
+        <div class="p-node">
+          <span class="p-num">01</span>
+          <span class="p-format">2–3 hour session</span>
+        </div>
+        <div class="p-body">
+          <h3>Clarity Sprint™</h3>
+          <p class="p-tag">Get unstuck in days, not months.</p>
+          <p class="p-desc">A perspective-and-focus session, not a planning session. Zoom out to where
+            your industry and value network are heading — then collapse all of it into the one thing
+            you should be best in the world at, and a short Stop / Start / Focus list to get you there.</p>
+          <p class="p-best"><b>Best for</b> Founders facing a specific decision or blocker</p>
+        </div>
+        <div class="p-side">
+          <p class="p-price">AED 2,500–3,000<small>Single session · one-page Clarity Memo</small></p>
+          <!-- PLACEHOLDER: self-serve calendar booking at Stage 5 -->
+          <a class="btn btn-primary" href="#">Book this Sprint</a>
+          <a class="p-explore" href="consulting-clarity-sprint.html">Explore Clarity Sprint <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <!-- 02 Strategy Sprint — product page: /consulting/strategy-sprint (follows) -->
+      <article class="product reveal" style="--d:.1s" id="strategy-sprint">
+        <div class="p-node">
+          <span class="p-num">02</span>
+          <span class="p-format">1 day · scalable to 2–3 weeks</span>
+        </div>
+        <div class="p-body">
+          <h3>Strategy Sprint™</h3>
+          <p class="p-tag">A focused strategic roadmap.</p>
+          <p class="p-desc">Our flagship clarity product. In a single structured day, the founder and
+            leadership team move from scattered priorities to a documented strategy, a re-engineered
+            business model, and a prioritised 90-day action roadmap with owners and metrics.</p>
+          <p class="p-best"><b>Best for</b> Businesses needing direction before committing resources</p>
+        </div>
+        <div class="p-side">
+          <p class="p-price">AED 10,000–15,000<small>Founder, Leadership &amp; Deep Sprint formats</small></p>
+          <!-- PLACEHOLDER: self-serve calendar booking at Stage 5 -->
+          <a class="btn btn-primary" href="#">Book this Sprint</a>
+          <a class="p-explore" href="consulting-strategy-sprint.html">Explore Strategy Sprint <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <!-- 03 GapNavigator — product page: /consulting/gapnavigator (follows) -->
+      <article class="product reveal" style="--d:.15s" id="gapnavigator">
+        <div class="p-node">
+          <span class="p-num">03</span>
+          <span class="p-format">Diagnostic engagement</span>
+        </div>
+        <div class="p-body">
+          <h3>GapNavigator™</h3>
+          <p class="p-tag">Find what&rsquo;s missing before it costs you.</p>
+          <p class="p-desc">A structured diagnostic that scores your business across eight domains —
+            producing a Clarity Score™, a Reality Map of the true current state, a Bottlenecks Report,
+            and an Opportunity Map ranking the 3–7 moves that matter most right now.</p>
+          <p class="p-best"><b>Best for</b> Teams that suspect a gap but can&rsquo;t name it yet</p>
+        </div>
+        <div class="p-side">
+          <p class="p-price">AED 12,000–18,000<small>A defensible score — not opinion</small></p>
+          <!-- PLACEHOLDER: booking at Stage 5 -->
+          <a class="btn btn-primary" href="#">Book this engagement</a>
+          <a class="p-explore" href="consulting-gapnavigator.html">Explore GapNavigator <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <!-- 04 Brand 3D — product page: /consulting/brand-3d (follows) -->
+      <article class="product reveal" style="--d:.2s" id="brand-3d">
+        <div class="p-node">
+          <span class="p-num">04</span>
+          <span class="p-format">3–4 weeks</span>
+        </div>
+        <div class="p-body">
+          <h3>Brand 3D™</h3>
+          <p class="p-tag">A brand built to be believed.</p>
+          <p class="p-desc">The full marketing engine, built across three dimensions: sharpened
+            positioning, a complete messaging architecture, a content engine with defined pillars and
+            cadence, and a demand generation system mapped to real channels.</p>
+          <p class="p-best"><b>Best for</b> Businesses whose brand hasn&rsquo;t caught up to their ambition</p>
+        </div>
+        <div class="p-side">
+          <p class="p-price">AED 15,000–25,000<small>Positioning · messaging · demand engine</small></p>
+          <!-- PLACEHOLDER: booking at Stage 5 -->
+          <a class="btn btn-primary" href="#">Book this engagement</a>
+          <a class="p-explore" href="consulting-brand-3d.html">Explore Brand 3D <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <!-- 05 OpsBlueprint — product page: /consulting/opsblueprint (follows) -->
+      <article class="product reveal" style="--d:.25s" id="opsblueprint">
+        <div class="p-node">
+          <span class="p-num">05</span>
+          <span class="p-format">4 weeks</span>
+        </div>
+        <div class="p-body">
+          <h3>OpsBlueprint™</h3>
+          <p class="p-tag">Operations that scale without breaking.</p>
+          <p class="p-desc">Operations engineered like a product: a full capability map of the current
+            state, up to 10 key SOPs documented to the eHive standard, a redesigned org model, KPI
+            dashboards, and a 30-60-90 activation plan with named owners.</p>
+          <p class="p-best"><b>Best for</b> Founders whose growth is outrunning their systems</p>
+        </div>
+        <div class="p-side">
+          <p class="p-price">AED 40,000–70,000<small>Scoped per engagement</small></p>
+          <!-- PLACEHOLDER: discovery-call flow at Stage 5 (consultative sale) -->
+          <a class="btn btn-ghost" href="#">Talk to us first</a>
+          <p class="talk">A discovery call precedes booking at this scale.</p>
+          <a class="p-explore" href="consulting-opsblueprint.html">Explore OpsBlueprint <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <!-- 06 Momentum90 — product page: /consulting/momentum90 (follows) -->
+      <article class="product reveal" style="--d:.3s" id="momentum90">
+        <div class="p-node">
+          <span class="p-num">06</span>
+          <span class="p-format">90 days</span>
+        </div>
+        <div class="p-body">
+          <h3>Momentum90™</h3>
+          <p class="p-tag">A 90-day growth engagement.</p>
+          <p class="p-desc">The execution layer of the ecosystem: a 12-month roadmap with quarterly OKRs,
+            a KPI Tree™ down to leading indicators, a weekly execution rhythm with monthly recalibration —
+            progress whether or not you&rsquo;re in the room.</p>
+          <p class="p-best"><b>Best for</b> Businesses ready for sustained, hands-on transformation</p>
+        </div>
+        <div class="p-side">
+          <p class="p-price">AED 75,000<small>or AED 25,000 / month</small></p>
+          <!-- PLACEHOLDER: discovery-call flow at Stage 5 (consultative sale) -->
+          <a class="btn btn-ghost" href="#">Talk to us first</a>
+          <p class="talk">A discovery call precedes booking at this scale.</p>
+          <a class="p-explore" href="consulting-momentum90.html">Explore Momentum90 <span class="arr">→</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW EVERY ENGAGEMENT RUNS (blueprint 4 — process, not
+     fabricated case studies; real client work joins post-launch) ================= -->
+<section class="process light" aria-labelledby="process-h">
+  <div class="wrap pad">
+    <p class="eyebrow reveal">How it works</p>
+    <h2 class="h2 reveal" style="--d:.08s" id="process-h">Every engagement, the same discipline.</h2>
+    <ol class="steps" id="steps">
+      <li class="step reveal" style="--d:.05s">
+        <span class="step-num" aria-hidden="true">1</span>
+        <h3>Tell us the problem.</h3>
+        <p>A short intake — what&rsquo;s blocked, unclear, or outgrowing its systems.</p>
+      </li>
+      <li class="step reveal" style="--d:.15s">
+        <span class="step-num" aria-hidden="true">2</span>
+        <h3>Matched with a vetted specialist.</h3>
+        <p>The right expert for your product and industry leads the engagement.</p>
+      </li>
+      <li class="step reveal" style="--d:.25s">
+        <span class="step-num" aria-hidden="true">3</span>
+        <h3>The work happens.</h3>
+        <p>Sprint, diagnostic, or build — structured, documented, and on a fixed scope.</p>
+      </li>
+      <li class="step reveal" style="--d:.35s">
+        <span class="step-num" aria-hidden="true">4</span>
+        <h3>Core-team review, then delivery.</h3>
+        <p>Nothing reaches you until eHive&rsquo;s core team has reviewed it.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="page-cta" aria-labelledby="c-cta-h">
+  <svg class="lattice-bg" viewBox="0 0 1200 420" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#B8862E" stroke-width=".7" opacity=".35">
+      <path d="M120 210 260 120 420 190 580 90 760 180 930 110 1080 200"/>
+      <path d="M180 330 340 250 520 320 700 240 890 330 1060 260"/>
+    </g>
+    <g fill="#D9AE5F">
+      <circle cx="120" cy="210" r="3"/><circle cx="260" cy="120" r="4"/><circle cx="420" cy="190" r="3"/>
+      <circle cx="580" cy="90" r="4.5"/><circle cx="760" cy="180" r="3"/><circle cx="930" cy="110" r="4"/>
+      <circle cx="1080" cy="200" r="3"/><circle cx="340" cy="250" r="4"/><circle cx="700" cy="240" r="4"/>
+      <circle cx="890" cy="330" r="3"/>
+    </g>
+  </svg>
+  <div class="wrap pad" style="position:relative;z-index:1">
+    <h2 class="reveal" id="c-cta-h">Not sure which product fits?</h2>
+    <p class="lede reveal" style="--d:.12s">That&rsquo;s exactly what the Clarity Sprint exists for —
+      one session, one point of focus. Or tell us the problem and we&rsquo;ll point you to the right door.</p>
+    <div class="cta-row reveal" style="--d:.22s">
+      <!-- PLACEHOLDER: booking + /get-started routing at Stage 5 -->
+      <a class="btn btn-primary" href="#">Start with a Clarity Sprint</a>
+      <a class="btn btn-ghost on-dark" href="#">Tell us the problem</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/ehive-full.png" alt="eHive — Build. Belong. Become." width="150">
+        <p>To advance the human race by enabling individuals and organisations to do better —
+          sustainably, relevantly, and beneficially.</p>
+      </div>
+      <div class="foot-col">
+        <h4>The Ecosystem</h4>
+        <ul>
+          <li><a href="business-setup.html">Business Setup</a></li>
+          <li><a href="consulting.html">Consulting</a></li>
+          <li><a href="circle.html">eHive Circle</a></li>
+          <li><a href="business-setup.html#calculator">Cost Calculator</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights — The Hive Journal</a></li>
+          <li><a href="#">Join the Network</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <p class="foot-loc">Dubai, UAE<span>Expanding across the region</span></p>
+        <!-- PLACEHOLDER: newsletter signup not wired yet (Stage 5) -->
+        <form class="news-form" action="#" method="post" aria-label="Newsletter signup">
+          <label class="visually-hidden" for="news-email">Email address</label>
+          <input id="news-email" type="email" placeholder="Your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> eHive. All rights reserved.</span>
+      <div class="foot-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="socials">
+        <!-- PLACEHOLDER: social profile URLs to be supplied -->
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.16h4.52V23H.24zM8.34 8.16h4.33v2.03h.06c.6-1.14 2.08-2.34 4.28-2.34C21.6 7.85 23 10.3 23 13.98V23h-4.51v-7.96c0-1.9-.03-4.34-2.65-4.34-2.65 0-3.05 2.07-3.05 4.2V23H8.34z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  document.body.classList.add("anim");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var nav = document.getElementById("siteNav");
+  function onScroll(){ nav.classList.toggle("scrolled", window.scrollY > 40); }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  var toggle = document.getElementById("navToggle");
+  toggle.addEventListener("click", function(){
+    var open = document.body.classList.toggle("menu-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.querySelectorAll(".nav-links a").forEach(function(a){
+    a.addEventListener("click", function(){
+      document.body.classList.remove("menu-open");
+      toggle.setAttribute("aria-expanded","false");
+    });
+  });
+
+  var ioAlive = false;
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      ioAlive = true;
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in-view"); io.unobserve(e.target); }
+      });
+    }, {threshold:.14, rootMargin:"0px 0px -6% 0px"});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    ioAlive = true;
+    reveals.forEach(function(el){ el.classList.add("in-view"); });
+  }
+
+  var steps = document.getElementById("steps");
+  if (steps && "IntersectionObserver" in window && !reduceMotion){
+    var so = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ steps.classList.add("draw"); so.disconnect(); }
+      });
+    }, {threshold:.3});
+    so.observe(steps);
+  } else if (steps){ steps.classList.add("draw"); }
+
+  setTimeout(function(){
+    if (!ioAlive){
+      reveals.forEach(function(el){ el.classList.add("in-view"); });
+      if (steps) steps.classList.add("draw");
+    }
+  }, 2600);
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
