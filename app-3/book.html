@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a time — eHive</title>
+<meta name="description" content="Book a consulting sprint, engagement, discovery call or business setup consultation. Choose a day and time — Gulf Standard Time.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 27 9.5v13L16 29 5 22.5v-13z' fill='none' stroke='%23B8862E' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23B8862E'/%3E%3C/svg%3E">
+<style>
+/* eHive design system (locked). Booking page. Stage 5 — placeholder availability & backend; wiring complete.
+   Content sourced from the client-supplied Clarity Sprint Brochure Brief. */
+:root{
+  --navy:#1A1A2E; --navy-2:#151527; --navy-3:#0C0C16;
+  --gold:#B8862E; --gold-2:#D9AE5F; --gold-soft:rgba(184,134,46,.16);
+  --ivory:#F7F4ED; --ivory-2:#EFEBE0;
+  --ink:#23233C; --mut:#61617C;
+  --line-l:rgba(26,26,46,.14); --line-d:rgba(247,244,237,.13);
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:Calibri,'Segoe UI',Candara,'Helvetica Neue',Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(5rem,9vw,8rem);
+  --max:1220px; --narrow:820px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:var(--sans);background:var(--navy-3);color:var(--ivory);
+  font-size:1.0625rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--gold);color:var(--navy-3)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--navy-3)}
+::-webkit-scrollbar-thumb{background:#3a3a52;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;top:-60px;left:1rem;z-index:200;background:var(--gold);color:var(--navy-3);
+  padding:.6rem 1.1rem;border-radius:2px;transition:top .3s;font-size:.9rem}
+.skip:focus{top:1rem}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:clamp(1.25rem,4.5vw,3rem)}
+.narrow{max-width:var(--narrow);margin:0 auto;padding-inline:clamp(1.25rem,4.5vw,3rem)}
+section{position:relative}
+.eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.4rem;display:flex;align-items:center;gap:.9rem}
+.eyebrow::before{content:"";width:2.2rem;height:1px;background:var(--gold);opacity:.7}
+.pad{padding-block:var(--pad)}
+.light{background:var(--ivory);color:var(--ink)}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.6vw,2.9rem);
+  line-height:1.2;letter-spacing:-.01em}
+.lede{color:var(--mut);font-size:1.1rem;max-width:62ch}
+.anim .reveal{opacity:0;transform:translateY(36px);filter:blur(7px);
+  transition:opacity 1.05s var(--ease),transform 1.05s var(--ease),filter 1.05s var(--ease);
+  transition-delay:var(--d,0s)}
+.anim .reveal.in-view{opacity:1;transform:none;filter:none}
+
+.btn{display:inline-flex;align-items:center;gap:.65rem;font-weight:700;
+  font-size:.92rem;letter-spacing:.05em;padding:.95rem 1.9rem;border-radius:2px;cursor:pointer;
+  border:1px solid transparent;transition:all .38s var(--ease)}
+.btn .arr{transition:transform .38s var(--ease)}
+.btn:hover .arr{transform:translateX(5px)}
+.btn-primary{background:var(--gold);color:#10101E}
+.btn-primary:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(184,134,46,.55)}
+.btn-ghost{background:transparent;color:var(--gold);border-color:rgba(184,134,46,.55)}
+.btn-ghost:hover{background:var(--gold-soft);border-color:var(--gold);transform:translateY(-2px)}
+.btn-ghost.on-dark{color:var(--gold-2)}
+.btn-sm{padding:.62rem 1.3rem;font-size:.85rem}
+
+.site-nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .5s var(--ease),border-color .5s;
+  border-bottom:1px solid transparent}
+.site-nav.scrolled{background:rgba(12,12,22,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--line-d)}
+.site-nav nav{max-width:1360px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);height:84px;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.brand{display:flex;align-items:center}
+.brand img{height:26px;width:auto}
+.nav-links{display:flex;align-items:center;gap:2.4rem;list-style:none;margin:0}
+.nav-links a{font-size:.93rem;letter-spacing:.04em;color:rgba(247,244,237,.82);
+  transition:color .3s;position:relative;padding-block:.4rem}
+.nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.nav-links a:not(.btn):hover{color:var(--gold-2)}
+.nav-links a:not(.btn):hover::after{transform:scaleX(1);transform-origin:left}
+.nav-links a[aria-current="page"]{color:var(--gold-2)}
+.nav-links a[aria-current="page"]::after{transform:scaleX(1)}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;position:relative;z-index:110}
+.nav-toggle span{position:absolute;left:10px;width:24px;height:1.6px;background:var(--ivory);transition:all .4s var(--ease)}
+.nav-toggle span:nth-child(1){top:16px}.nav-toggle span:nth-child(2){top:22px}.nav-toggle span:nth-child(3){top:28px}
+.menu-open .nav-toggle span:nth-child(1){top:22px;transform:rotate(45deg);background:var(--gold)}
+.menu-open .nav-toggle span:nth-child(2){opacity:0}
+.menu-open .nav-toggle span:nth-child(3){top:22px;transform:rotate(-45deg);background:var(--gold)}
+
+.crumbs{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,244,237,.5);
+  margin-bottom:2.4rem;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.crumbs a{color:rgba(247,244,237,.65);transition:color .3s}
+.crumbs a:hover{color:var(--gold-2)}
+.crumbs i{font-style:normal;color:var(--gold)}
+
+/* ---------- product hero ---------- */
+.p-hero{background:radial-gradient(110% 100% at 50% 0%,#1e1e36 0%,var(--navy-2) 52%,var(--navy-3) 100%);
+  color:var(--ivory);padding:11rem 0 6rem;overflow:hidden}
+.p-hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(2.5rem,5vw,5rem);align-items:start;
+  position:relative;z-index:1}
+.p-hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,4.1rem);
+  line-height:1.12;letter-spacing:-.015em;max-width:16ch}
+.p-hero h1 em{font-style:italic;color:var(--gold-2)}
+.p-hero .sub{margin-top:1.7rem;font-size:clamp(1.03rem,1.5vw,1.2rem);color:rgba(247,244,237,.78);max-width:52ch}
+.p-name{display:inline-flex;align-items:center;gap:.7rem;font-size:.78rem;font-weight:700;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold-2);margin-bottom:1.6rem}
+.p-name::before,.p-name::after{content:"";width:1.8rem;height:1px;background:var(--gold);opacity:.7}
+.motif{margin-top:3rem;width:100%;max-width:520px;opacity:.9}
+/* sticky booking card */
+.book-card{border:1px solid rgba(184,134,46,.4);border-radius:3px;background:rgba(12,12,22,.55);
+  backdrop-filter:blur(10px);padding:2.4rem 2.2rem;position:sticky;top:110px}
+.book-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.bc-format{font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(247,244,237,.55);margin-bottom:1rem}
+.bc-price{font-family:var(--serif);font-size:clamp(2rem,3.4vw,2.6rem);color:var(--gold-2);line-height:1.1}
+.bc-price-note{font-size:.85rem;color:rgba(247,244,237,.6);margin-top:.5rem;margin-bottom:1.8rem}
+.bc-list{list-style:none;border-top:1px solid var(--line-d);margin-bottom:1.8rem}
+.bc-list li{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--line-d);
+  font-size:.92rem;color:rgba(247,244,237,.8)}
+.bc-list li::before{content:"";flex:none;width:6px;height:6px;background:var(--gold);
+  transform:rotate(45deg);margin-top:.5rem}
+.book-card .btn{width:100%;justify-content:center}
+.bc-note{margin-top:1.1rem;font-size:.78rem;color:rgba(247,244,237,.45);text-align:center}
+
+/* ---------- promise band ---------- */
+.promise{background:var(--navy-3);border-block:1px solid var(--line-d)}
+.promise .narrow{padding-block:clamp(4.5rem,8vw,6.5rem);text-align:center}
+.promise blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,2.8vw,2.2rem);
+  line-height:1.5;color:rgba(247,244,237,.92)}
+.promise blockquote b{color:var(--gold-2);font-weight:700}
+.promise .attr{margin-top:2rem;font-size:.74rem;font-weight:700;letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(247,244,237,.45)}
+
+
+/* cinematic image banner (chapter break) */
+.img-banner{position:relative;height:clamp(340px,48vw,600px);overflow:hidden;margin:0}
+.img-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  animation:kb 34s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1) translateY(0)}to{transform:scale(1.07) translateY(-1.5%)}}
+.img-banner .ib-overlay{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(12,12,22,.6),rgba(12,12,22,.26) 45%,rgba(12,12,22,.64))}
+.img-banner figcaption{position:absolute;left:0;right:0;bottom:clamp(1.8rem,4vw,3rem);text-align:center;
+  font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,2.3vw,1.65rem);
+  color:rgba(247,244,237,.94);z-index:1;padding-inline:1.5rem}
+
+/* ---------- takeaways ---------- */
+.takeaways{background:var(--ivory)}
+.tk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-top:3.2rem}
+.tk-item{background:#fff;border:1px solid var(--line-l);border-radius:3px;padding:2rem 2.1rem;
+  display:flex;gap:1.4rem;transition:transform .5s var(--ease),box-shadow .5s,border-color .5s}
+.tk-item:hover{transform:translateY(-5px);border-color:rgba(184,134,46,.4);
+  box-shadow:0 22px 46px -24px rgba(26,26,46,.22)}
+.tk-item:last-child{grid-column:1/-1}
+.tk-item .n{font-family:var(--serif);color:var(--gold);font-size:1rem;flex:none;padding-top:.15rem}
+.tk-item h3{font-family:var(--serif);font-weight:400;font-size:1.18rem;margin-bottom:.45rem;letter-spacing:-.01em}
+.tk-item p{color:var(--mut);font-size:.95rem;line-height:1.65}
+
+/* ---------- fit ---------- */
+.fit{background:var(--ivory-2)}
+.fit-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.6rem;margin-top:3.2rem}
+.fit-yes,.fit-no{border-radius:3px;padding:2.4rem 2.3rem}
+.fit-yes{background:#fff;border:1px solid var(--line-l)}
+.fit-no{background:transparent;border:1px dashed rgba(97,97,124,.45)}
+.fit-yes h3,.fit-no h3{font-family:var(--serif);font-weight:400;font-size:1.3rem;margin-bottom:1.8rem;letter-spacing:-.01em}
+.fit-no h3{color:var(--mut)}
+.fit-row{display:flex;gap:1.2rem;padding:1.1rem 0;border-top:1px solid var(--line-l)}
+.fit-row:first-of-type{border-top:0}
+.fit-row .k{flex:none;width:96px;font-size:.68rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);padding-top:.3rem}
+.fit-row p{color:var(--mut);font-size:.98rem}
+.fit-no p{color:var(--mut)}
+.fit-no .fit-row{border-top-color:rgba(97,97,124,.25)}
+.fit-no .k{color:var(--mut)}
+
+/* ---------- format & investment ---------- */
+.format{background:var(--ivory)}
+.format-card{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3.2rem}
+.format-cell{background:#fff;border:1px solid var(--line-l);border-radius:3px;padding:2.2rem 2rem;text-align:center}
+.format-cell .k{font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem}
+.format-cell .v{font-family:var(--serif);font-size:1.6rem;color:var(--ink);letter-spacing:-.01em;line-height:1.25}
+.format-cell .s{font-size:.88rem;color:var(--mut);margin-top:.5rem}
+
+/* strategy tiers */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3.2rem}
+.tier{background:#fff;border:1px solid var(--line-l);border-radius:3px;padding:2.3rem 2.1rem;
+  display:flex;flex-direction:column;position:relative;transition:transform .5s var(--ease),box-shadow .5s,border-color .5s}
+.tier:hover{transform:translateY(-5px);box-shadow:0 22px 46px -24px rgba(26,26,46,.22)}
+.tier.featured{border-color:rgba(184,134,46,.55);box-shadow:0 26px 54px -26px rgba(184,134,46,.35)}
+.tier.featured::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2))}
+.t-name{font-size:.74rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.t-price{font-family:var(--serif);font-size:2rem;color:var(--ink);letter-spacing:-.01em;line-height:1.1;margin-bottom:1.4rem}
+.t-list{list-style:none;flex:1}
+.t-list li{display:flex;gap:.75rem;align-items:flex-start;padding:.6rem 0;border-top:1px solid var(--line-l);
+  color:var(--mut);font-size:.95rem}
+.t-list li::before{content:"";flex:none;width:6px;height:6px;background:var(--gold);transform:rotate(45deg);margin-top:.5rem}
+.t-tag{margin-top:1.4rem;font-family:var(--serif);font-style:italic;color:var(--mut);font-size:.92rem}
+@media (max-width:1020px){.tiers{grid-template-columns:1fr;max-width:460px;margin-inline:auto}}
+.format-cta{margin-top:3rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.format-cta .fine{font-size:.84rem;color:var(--mut)}
+
+/* ---------- next product ---------- */
+.next-prod{background:var(--navy);color:var(--ivory);border-top:1px solid var(--line-d)}
+.next-prod a{display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  padding-block:3rem;transition:padding .45s var(--ease)}
+.next-prod a:hover{padding-left:1rem}
+.next-prod .np-k{font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:.5rem}
+.next-prod .np-name{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:-.01em}
+.next-prod .np-tag{color:rgba(247,244,237,.6);font-size:.95rem;margin-top:.3rem}
+.next-prod .np-arrow{font-size:2rem;color:var(--gold);flex:none;transition:transform .45s var(--ease)}
+.next-prod a:hover .np-arrow{transform:translateX(8px)}
+
+/* ---------- footer (shared) ---------- */
+footer{background:var(--navy-3);color:rgba(247,244,237,.72);border-top:1px solid var(--line-d)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:clamp(2.5rem,5vw,4.5rem);
+  padding-block:clamp(4rem,7vw,6rem)}
+.foot-brand img{width:150px;height:auto;margin-bottom:1.6rem}
+.foot-brand p{font-size:.95rem;line-height:1.75;color:rgba(247,244,237,.6);max-width:34ch}
+.foot-col h4{font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:1.5rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.foot-col a{font-size:.95rem;color:rgba(247,244,237,.72);transition:color .3s}
+.foot-col a:hover{color:var(--gold-2)}
+.foot-loc{font-size:.95rem;line-height:1.8;color:rgba(247,244,237,.72)}
+.foot-loc span{display:block;font-size:.82rem;color:rgba(247,244,237,.45);margin-top:.3rem}
+.news-form{display:flex;margin-top:1.4rem;border:1px solid var(--line-d);border-radius:2px;overflow:hidden}
+.news-form input{flex:1;min-width:0;background:rgba(247,244,237,.04);border:0;color:var(--ivory);
+  padding:.8rem 1rem;font-family:var(--sans);font-size:.92rem}
+.news-form input::placeholder{color:rgba(247,244,237,.4)}
+.news-form button{background:var(--gold);color:#10101E;border:0;padding:0 1.2rem;font-weight:700;
+  font-family:var(--sans);font-size:.88rem;cursor:pointer;transition:background .3s}
+.news-form button:hover{background:var(--gold-2)}
+.foot-bottom{border-top:1px solid var(--line-d);padding-block:1.8rem;display:flex;flex-wrap:wrap;
+  align-items:center;justify-content:space-between;gap:1.2rem;font-size:.85rem;color:rgba(247,244,237,.45)}
+.foot-legal{display:flex;gap:1.8rem}
+.foot-legal a{transition:color .3s}
+.foot-legal a:hover{color:var(--gold-2)}
+.socials{display:flex;gap:1rem}
+.socials a{width:38px;height:38px;border:1px solid var(--line-d);border-radius:50%;display:flex;
+  align-items:center;justify-content:center;color:rgba(247,244,237,.65);transition:all .35s var(--ease)}
+.socials a:hover{border-color:var(--gold);color:var(--gold-2);transform:translateY(-3px)}
+.socials svg{width:16px;height:16px}
+
+@media (max-width:1020px){
+  .p-hero-grid{grid-template-columns:1fr}
+  .book-card{position:static}
+  .tk-grid{grid-template-columns:1fr}
+  .fit-grid{grid-template-columns:1fr}
+  .format-card{grid-template-columns:1fr;max-width:460px;margin-inline:auto}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .nav-toggle{display:block}
+  .nav-links{position:fixed;inset:0;background:rgba(12,12,22,.97);backdrop-filter:blur(18px);
+    flex-direction:column;justify-content:center;gap:2.6rem;transform:translateY(-102%);
+    transition:transform .55s var(--ease);z-index:105}
+  .menu-open .nav-links{transform:translateY(0)}
+  .nav-links a{font-size:1.35rem;font-family:var(--serif)}
+  .nav-links .btn{font-family:var(--sans);font-size:1rem}
+  .foot-grid{grid-template-columns:1fr;gap:2.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .anim .reveal{opacity:1;transform:none;filter:none}
+}
+
+/* ================= BOOKING PAGE ================= */
+.c-chips{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.4rem}
+.chip{border:1px solid var(--line-d);border-radius:2px;padding:.55rem .95rem;font-size:.82rem;
+  color:rgba(247,244,237,.78);letter-spacing:.02em}
+.chip.ph{border-style:dashed;border-color:rgba(184,134,46,.5);color:rgba(247,244,237,.5)}
+
+.bk-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2.2rem,4.5vw,4rem);align-items:start}
+@media (max-width:960px){.bk-wrap{grid-template-columns:1fr}}
+
+/* summary panel (dark) */
+.bk-side{background:var(--navy);border:1px solid var(--line-d);border-radius:3px;color:var(--ivory);
+  padding:clamp(2rem,3.5vw,2.8rem);position:relative;overflow:hidden}
+.bk-side::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent 70%)}
+.bk-kicker{font-size:.68rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:1.1rem}
+.bk-name{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,2.8vw,2.1rem);line-height:1.2}
+.bk-meta{margin-top:1.2rem;display:flex;flex-direction:column;gap:.4rem}
+.bk-meta span{font-size:.94rem;color:rgba(247,244,237,.75)}
+.bk-meta b{color:var(--gold-2);font-weight:700}
+.bk-after{margin-top:2rem;border-top:1px solid var(--line-d);padding-top:1.6rem}
+.bk-after h3{font-family:var(--serif);font-weight:400;font-size:1.05rem;margin-bottom:1rem;color:var(--gold-2)}
+.bk-after li{list-style:none;display:flex;gap:.8rem;padding:.5rem 0;font-size:.9rem;color:rgba(247,244,237,.72)}
+.bk-after .rn{font-family:var(--serif);color:var(--gold);flex:none}
+.bk-free{margin-top:1.6rem;font-size:.84rem;color:rgba(247,244,237,.55);font-style:italic}
+
+/* booking card */
+.bk-card{background:#fff;border:1px solid var(--line-l);border-radius:3px;
+  box-shadow:0 30px 70px rgba(26,26,46,.10);padding:clamp(2rem,4vw,3rem)}
+.bk-step{margin-bottom:2.4rem}
+.bk-step>h3{font-family:var(--serif);font-weight:400;font-size:1.2rem;margin-bottom:1.1rem;
+  display:flex;align-items:baseline;gap:.7rem}
+.bk-step>h3 .sn{font-size:.72rem;font-weight:700;letter-spacing:.24em;color:var(--gold);font-family:var(--sans)}
+
+/* day picker */
+.day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.55rem}
+.day{border:1px solid rgba(26,26,46,.15);border-radius:2px;background:#fff;cursor:pointer;
+  padding:.7rem .2rem;text-align:center;font-family:var(--sans);transition:border-color .2s,background .2s}
+.day:hover:not(:disabled){border-color:var(--gold)}
+.day .dw{display:block;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mut)}
+.day .dn{display:block;font-family:var(--serif);font-size:1.25rem;margin-top:.2rem;color:var(--ink)}
+.day .dm{display:block;font-size:.62rem;color:var(--mut);margin-top:.1rem}
+.day.on{border-color:var(--gold);background:#FBF6EC}
+.day:disabled{opacity:.32;cursor:not-allowed}
+@media (max-width:560px){.day-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* slot picker */
+.slot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.slot{border:1px solid rgba(26,26,46,.15);border-radius:2px;background:#fff;cursor:pointer;
+  padding:.95rem .4rem;text-align:center;font-family:var(--sans);font-weight:700;font-size:.95rem;
+  color:var(--ink);transition:border-color .2s,background .2s}
+.slot small{display:block;font-weight:400;font-size:.68rem;color:var(--mut);margin-top:.15rem;letter-spacing:.08em}
+.slot:hover:not(:disabled){border-color:var(--gold)}
+.slot.on{border-color:var(--gold);background:#FBF6EC}
+.slot:disabled{opacity:.38;cursor:not-allowed}
+.slot.taken{text-decoration:line-through}
+@media (max-width:560px){.slot-grid{grid-template-columns:repeat(2,1fr)}}
+.bk-tz{font-size:.78rem;color:var(--mut);margin-top:.7rem}
+
+/* details (reuse gs field styles pattern) */
+.bk-fields{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.bk-fields .full{grid-column:1/-1}
+.gs-label{display:block;font-size:.88rem;color:rgba(30,30,41,.65)}
+.gs-input,.gs-area{display:block;width:100%;margin-top:.5rem;padding:.95rem 1.1rem;
+  border:1px solid rgba(26,26,46,.2);background:#F8F5F0;font-size:.95rem;font-family:var(--sans);
+  border-radius:2px;color:var(--ink);box-sizing:border-box}
+.gs-area{resize:vertical;min-height:96px}
+.gs-input:focus,.gs-area:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.gs-input.err{border-color:#B23B2E}
+.err-msg{display:none;font-size:.8rem;color:#B23B2E;margin-top:.45rem}
+.err-msg.on{display:block}
+@media (max-width:620px){.bk-fields{grid-template-columns:1fr}}
+.bk-actions{margin-top:2.2rem;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
+.bk-hint{font-size:.8rem;color:var(--mut)}
+
+/* confirmation */
+.bk-done{background:var(--navy);color:var(--ivory);border-radius:3px;
+  padding:clamp(2.2rem,4.5vw,3.2rem);text-align:center}
+.gs-check{width:52px;height:52px;border:1.5px solid var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+.bk-done h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,2.6vw,1.9rem)}
+.bk-done>p{color:rgba(247,244,237,.72);margin-top:.8rem;font-size:.96rem;max-width:48ch;margin-inline:auto}
+.gs-sum{text-align:left;max-width:460px;margin:1.8rem auto 0}
+.gs-sum li{list-style:none;display:flex;justify-content:space-between;gap:1.2rem;
+  padding:.65rem 0;border-bottom:1px solid var(--line-d);font-size:.9rem;color:rgba(247,244,237,.78)}
+.gs-sum li:first-child{border-top:1px solid var(--line-d)}
+.gs-sum li b{color:var(--gold-2);font-weight:400;font-family:var(--serif);text-align:right}
+.gs-note{margin-top:1.8rem;font-size:.8rem;color:rgba(247,244,237,.48)}
+.bk-again{margin-top:1.6rem;display:inline-block;font-size:.86rem;color:var(--gold-2);
+  border-bottom:1px solid rgba(217,174,95,.4);padding-bottom:.25rem;cursor:pointer;background:none;border-top:0;border-left:0;border-right:0;font-family:var(--sans)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-nav" id="siteNav">
+  <nav aria-label="Primary">
+    <a class="brand" href="index.html" aria-label="eHive — home">
+      <img src="assets/ehive-wordmark.png" alt="eHive" width="146" height="26">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="business-setup.html">Business Setup</a></li>
+      <li><a href="consulting.html">Consulting</a></li>
+      <li><a href="circle.html">eHive Circle</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a class="btn btn-primary btn-sm" href="get-started.html">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ================= BOOKING HERO ================= -->
+<section class="p-hero" aria-labelledby="page-h">
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html">Home</a><i>·</i><span>Book</span></p>
+    <div class="p-hero-grid">
+      <div>
+        <p class="p-name">Book</p>
+        <h1 id="page-h">Pick a time. <em>We&rsquo;ll do the rest.</em></h1>
+        <p class="sub">Choose a day and a slot — all times are Gulf Standard Time. You&rsquo;ll get a
+          confirmation by email with everything you need to prepare.</p>
+        <div class="c-chips">
+          <span class="chip">Gulf Standard Time (UTC+4)</span>
+          <span class="chip">Confirmation by email</span>
+          <!-- PLACEHOLDER: live availability syncs with the booking backend at go-live -->
+          <span class="chip ph">[ Preview availability ]</span>
+        </div>
+      </div>
+      <div class="reveal" style="--d:.15s">
+        <!-- motif: a calendar grid, one cell lit gold -->
+        <svg class="motif" viewBox="0 0 520 150" fill="none" aria-hidden="true">
+          <g stroke="#4a4a66" stroke-width="1.2">
+            <rect x="170" y="22" width="180" height="112" rx="2"/>
+            <path d="M170 48h180"/>
+            <path d="M215 48v86M260 48v86M305 48v86"/>
+            <path d="M170 77h180M170 106h180"/>
+          </g>
+          <rect x="263" y="80" width="39" height="23" fill="rgba(184,134,46,.16)" stroke="#D9AE5F" stroke-width="1.4"/>
+          <path d="M273 91l5 5 9-10" stroke="#D9AE5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="170" cy="22" r="3" fill="#D9AE5F"/><circle cx="350" cy="134" r="3" fill="#B8862E"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section class="light" aria-label="Booking">
+  <div class="wrap pad">
+    <div class="bk-wrap">
+      <!-- summary panel -->
+      <aside class="bk-side reveal" style="--d:.1s">
+        <p class="bk-kicker">You&rsquo;re booking</p>
+        <h2 class="bk-name" id="bkName">Discovery call</h2>
+        <div class="bk-meta">
+          <span id="bkFmt">30-minute call</span>
+          <span><b id="bkPrice">No charge</b></span>
+        </div>
+        <div class="bk-after">
+          <h3>After you book</h3>
+          <ul>
+            <li><span class="rn">01</span><span>A confirmation email with the calendar invitation.</span></li>
+            <li><span class="rn">02</span><span id="bkPrep">Tell us where you are and where you&rsquo;re headed.</span></li>
+            <li><span class="rn">03</span><span>The session — on time, prepared, and worth your hour.</span></li>
+          </ul>
+        </div>
+        <p class="bk-free" id="bkFree">No charge — a conversation, not a commitment.</p>
+      </aside>
+
+      <!-- booking card -->
+      <div class="bk-card reveal" style="--d:.16s">
+        <form id="bkForm" novalidate>
+          <div class="bk-step">
+            <h3><span class="sn">01</span>Choose a day</h3>
+            <div class="day-grid" id="dayGrid" role="group" aria-label="Choose a day"></div>
+          </div>
+          <div class="bk-step">
+            <h3><span class="sn">02</span>Choose a time</h3>
+            <div class="slot-grid" id="slotGrid" role="group" aria-label="Choose a time slot"></div>
+            <p class="bk-tz">All times Gulf Standard Time (UTC+4). Crossed-out slots are taken —
+              <b>preview availability</b> until the live calendar connects.</p>
+          </div>
+          <div class="bk-step" style="margin-bottom:0">
+            <h3><span class="sn">03</span>Your details</h3>
+            <div class="bk-fields">
+              <label class="gs-label" for="bkNameIn">Full name
+                <input class="gs-input" id="bkNameIn" type="text" placeholder="Your name" autocomplete="name">
+                <span class="err-msg" id="bkErrName">Please tell us your name.</span>
+              </label>
+              <label class="gs-label" for="bkEmail">Email
+                <input class="gs-input" id="bkEmail" type="email" placeholder="you@company.com" autocomplete="email">
+                <span class="err-msg" id="bkErrEmail">That email doesn&rsquo;t look right.</span>
+              </label>
+              <label class="gs-label full" for="bkNotes">Anything we should know? <span style="opacity:.55">(optional)</span>
+                <textarea class="gs-area" id="bkNotes" rows="3" placeholder="Context, questions, or anything that helps us prepare"></textarea>
+              </label>
+            </div>
+            <div class="bk-actions">
+              <button type="button" class="btn btn-primary" id="bkConfirm">Confirm booking</button>
+              <span class="bk-hint" id="bkHint">Pick a day and a time first.</span>
+            </div>
+          </div>
+        </form>
+
+        <!-- confirmation state -->
+        <div class="bk-done" id="bkDone" style="display:none">
+          <div class="gs-check" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 13l4.5 4.5L19 7" stroke="#B8862E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Request received.</h3>
+          <p>A confirmation email with your calendar invitation is on its way to
+            <b id="bkDoneEmail" style="color:var(--gold-2)"></b>.</p>
+          <ul class="gs-sum" id="bkSummary"></ul>
+          <p class="gs-note">[ PLACEHOLDER: this is the designed end-state — live availability,
+            calendar sync and confirmation emails wire to the booking backend at go-live.
+            Nothing was sent or stored just now. ]</p>
+          <button class="bk-again" id="bkAgain" type="button">Make another booking →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/ehive-full.png" alt="eHive — Build. Belong. Become." width="150">
+        <p>To advance the human race by enabling individuals and organisations to do better —
+          sustainably, relevantly, and beneficially.</p>
+      </div>
+      <div class="foot-col">
+        <h4>The Ecosystem</h4>
+        <ul>
+          <li><a href="business-setup.html">Business Setup</a></li>
+          <li><a href="consulting.html">Consulting</a></li>
+          <li><a href="circle.html">eHive Circle</a></li>
+          <li><a href="business-setup.html#calculator">Cost Calculator</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights — The Hive Journal</a></li>
+          <li><a href="#">Join the Network</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <p class="foot-loc">Dubai, UAE<span>Expanding across the region</span></p>
+        <!-- PLACEHOLDER: newsletter signup not wired yet (Stage 5) -->
+        <form class="news-form" action="#" method="post" aria-label="Newsletter signup">
+          <label class="visually-hidden" for="news-email">Email address</label>
+          <input id="news-email" type="email" placeholder="Your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> eHive. All rights reserved.</span>
+      <div class="foot-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="socials">
+        <!-- PLACEHOLDER: social profile URLs to be supplied -->
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.16h4.52V23H.24zM8.34 8.16h4.33v2.03h.06c.6-1.14 2.08-2.34 4.28-2.34C21.6 7.85 23 10.3 23 13.98V23h-4.51v-7.96c0-1.9-.03-4.34-2.65-4.34-2.65 0-3.05 2.07-3.05 4.2V23H8.34z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  document.body.classList.add("anim");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var nav = document.getElementById("siteNav");
+  function onScroll(){ nav.classList.toggle("scrolled", window.scrollY > 40); }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  var toggle = document.getElementById("navToggle");
+  toggle.addEventListener("click", function(){
+    var open = document.body.classList.toggle("menu-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.querySelectorAll(".nav-links a").forEach(function(a){
+    a.addEventListener("click", function(){
+      document.body.classList.remove("menu-open");
+      toggle.setAttribute("aria-expanded","false");
+    });
+  });
+
+  var ioAlive = false;
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      ioAlive = true;
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in-view"); io.unobserve(e.target); }
+      });
+    }, {threshold:.14, rootMargin:"0px 0px -6% 0px"});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    ioAlive = true;
+    reveals.forEach(function(el){ el.classList.add("in-view"); });
+  }
+  setTimeout(function(){
+    if (!ioAlive){ reveals.forEach(function(el){ el.classList.add("in-view"); }); }
+  }, 2600);
+
+
+  /* ---- booking engine (Stage 5: placeholder availability & backend) ---- */
+  var BOOK = {
+    "clarity-sprint": {name:"Clarity Sprint", fmt:"Three-hour working session", price:"AED 2,500–3,000",
+      prep:"Come with your three hardest questions — leave with one clear decision.", free:""},
+    "strategy-sprint": {name:"Strategy Sprint", fmt:"Full-day strategy engagement", price:"AED 10,000–15,000",
+      prep:"We\u2019ll send a short pre-read questionnaire after confirmation.", free:""},
+    "gapnavigator": {name:"GapNavigator", fmt:"Diagnostic engagement", price:"AED 12,000–18,000",
+      prep:"Bring your numbers — the honest ones.", free:""},
+    "brand-3d": {name:"Brand 3D", fmt:"Brand engagement", price:"AED 15,000–25,000",
+      prep:"We\u2019ll ask for your current brand assets before the session.", free:""},
+    "opsblueprint": {name:"OpsBlueprint — discovery call", fmt:"45-minute video call", price:"No charge",
+      prep:"A conversation about how your operation actually runs today.", free:"No charge — a conversation, not a commitment."},
+    "momentum90": {name:"Momentum90 — discovery call", fmt:"45-minute video call", price:"No charge",
+      prep:"Tell us where you\u2019re stuck — we\u2019ll tell you if we\u2019re the right fix.", free:"No charge — a conversation, not a commitment."},
+    "setup": {name:"Business setup consultation", fmt:"30-minute call", price:"No charge",
+      prep:"Jurisdiction, activity, visas — bring your questions.", free:"No charge — a conversation, not a commitment."},
+    "discovery": {name:"Discovery call", fmt:"30-minute call", price:"No charge",
+      prep:"Tell us where you are and where you\u2019re headed.", free:"No charge — a conversation, not a commitment."}
+  };
+  var pm = location.search.match(/[?&](?:product|type)=([a-z0-9-]+)/);
+  var bk = BOOK[pm && pm[1]] || BOOK["discovery"];
+  document.getElementById("bkName").textContent = bk.name;
+  document.getElementById("bkFmt").textContent = bk.fmt;
+  document.getElementById("bkPrice").textContent = bk.price;
+  document.getElementById("bkPrep").textContent = bk.prep;
+  document.getElementById("bkFree").textContent = bk.free || "Reschedule any time up to 24 hours before.";
+  document.title = "Book: " + bk.name + " — eHive";
+
+  var WD = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+  var MO = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var selDay = null, selSlot = null;
+  var dayGrid = document.getElementById("dayGrid");
+  var slotGrid = document.getElementById("slotGrid");
+  var bkHint = document.getElementById("bkHint");
+
+  function fmtDay(d){ return WD[d.getDay()].charAt(0) + WD[d.getDay()].slice(1).toLowerCase() + " " + d.getDate() + " " + MO[d.getMonth()]; }
+  function updateHint(){
+    bkHint.textContent = (selDay && selSlot) ? fmtDay(selDay) + " · " + selSlot + " GST — looks good?"
+      : selDay ? "Now pick a time slot."
+      : "Pick a day and a time first.";
+  }
+
+  for (var i = 1; i <= 14; i++){
+    (function(){
+      var dt = new Date(); dt.setHours(0,0,0,0); dt.setDate(dt.getDate() + i);
+      var wknd = (dt.getDay() === 0 || dt.getDay() === 6); /* UAE weekend: Sat & Sun */
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "day";
+      b.innerHTML = '<span class="dw">' + WD[dt.getDay()] + '</span><span class="dn">' + dt.getDate() + '</span><span class="dm">' + MO[dt.getMonth()] + '</span>';
+      if (wknd) b.disabled = true;
+      b.addEventListener("click", function(){
+        dayGrid.querySelectorAll(".day").forEach(function(x){ x.classList.remove("on"); });
+        b.classList.add("on");
+        selDay = dt; selSlot = null;
+        renderSlots(); updateHint();
+      });
+      dayGrid.appendChild(b);
+    })();
+  }
+
+  function renderSlots(){
+    slotGrid.innerHTML = "";
+    ["09:00","11:00","14:00","16:00"].forEach(function(t, idx){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "slot";
+      b.innerHTML = t + '<small>GST</small>';
+      /* dummy availability: deterministic "taken" slots until the live calendar connects */
+      var taken = selDay && ((Math.floor(selDay.getTime() / 864e5) + idx) % 4 === 1);
+      if (!selDay || taken) b.disabled = true;
+      if (taken) b.classList.add("taken");
+      b.addEventListener("click", function(){
+        slotGrid.querySelectorAll(".slot").forEach(function(x){ x.classList.remove("on"); });
+        b.classList.add("on");
+        selSlot = t; updateHint();
+      });
+      slotGrid.appendChild(b);
+    });
+  }
+  renderSlots();
+
+  document.getElementById("bkConfirm").addEventListener("click", function(){
+    if (!selDay || !selSlot){ bkHint.textContent = "Choose a day and a time slot to continue."; return; }
+    var name = document.getElementById("bkNameIn"), email = document.getElementById("bkEmail");
+    var nameBad = !name.value.trim();
+    var emailBad = !/.+@.+\..+/.test(email.value.trim());
+    name.classList.toggle("err", nameBad);
+    document.getElementById("bkErrName").classList.toggle("on", nameBad);
+    email.classList.toggle("err", emailBad);
+    document.getElementById("bkErrEmail").classList.toggle("on", emailBad);
+    if (nameBad || emailBad) return;
+
+    var rows = [["Booked", bk.name], ["When", fmtDay(selDay) + " · " + selSlot + " GST"],
+                ["Format", bk.fmt], ["Name", name.value.trim()], ["Email", email.value.trim()]];
+    var sum = document.getElementById("bkSummary");
+    sum.innerHTML = rows.map(function(){ return '<li><span></span><b></b></li>'; }).join("");
+    var spans = sum.querySelectorAll("li span"), bs = sum.querySelectorAll("li b");
+    rows.forEach(function(r, j){ spans[j].textContent = r[0]; bs[j].textContent = r[1]; });
+    document.getElementById("bkDoneEmail").textContent = email.value.trim();
+    document.getElementById("bkForm").style.display = "none";
+    document.getElementById("bkDone").style.display = "block";
+    document.querySelector(".bk-card").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+  document.getElementById("bkAgain").addEventListener("click", function(){
+    document.getElementById("bkDone").style.display = "none";
+    document.getElementById("bkForm").style.display = "block";
+  });
+
+  /* ---- newsletter capture (Stage 5: placeholder endpoint — wires to ESP at go-live) ---- */
+  document.querySelectorAll(".news-form, .sub-form").forEach(function(f){
+    f.addEventListener("submit", function(e){
+      e.preventDefault();
+      var inp = f.querySelector('input[type="email"]');
+      if (!inp || !/.+@.+\..+/.test(inp.value.trim())){ if (inp) inp.focus(); return; }
+      f.innerHTML = '<p style="margin:0;color:var(--gold-2);font-size:.92rem">You\u2019re on the list — watch your inbox.</p>';
+    });
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

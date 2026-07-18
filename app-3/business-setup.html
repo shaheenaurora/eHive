@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Setup — eHive</title>
+<meta name="description" content="Company formation, licensing, visas, and business infrastructure in the UAE — powered by Emirates First, delivered through eHive. Start on solid ground.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 27 9.5v13L16 29 5 22.5v-13z' fill='none' stroke='%23B8862E' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23B8862E'/%3E%3C/svg%3E">
+<style>
+/* eHive design system (locked with the approved landing page).
+   Business Setup pillar page — blueprint Section 3. */
+:root{
+  --navy:#1A1A2E; --navy-2:#151527; --navy-3:#0C0C16;
+  --gold:#B8862E; --gold-2:#D9AE5F; --gold-soft:rgba(184,134,46,.16);
+  --ivory:#F7F4ED; --ivory-2:#EFEBE0;
+  --ink:#23233C; --mut:#61617C;
+  --line-l:rgba(26,26,46,.14); --line-d:rgba(247,244,237,.13);
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:Calibri,'Segoe UI',Candara,'Helvetica Neue',Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(5rem,9vw,8rem);
+  --max:1220px; --narrow:820px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:var(--sans);background:var(--navy-3);color:var(--ivory);
+  font-size:1.0625rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--gold);color:var(--navy-3)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--navy-3)}
+::-webkit-scrollbar-thumb{background:#3a3a52;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;top:-60px;left:1rem;z-index:200;background:var(--gold);color:var(--navy-3);
+  padding:.6rem 1.1rem;border-radius:2px;transition:top .3s;font-size:.9rem}
+.skip:focus{top:1rem}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:clamp(1.25rem,4.5vw,3rem)}
+.narrow{max-width:var(--narrow);margin:0 auto;padding-inline:clamp(1.25rem,4.5vw,3rem)}
+section{position:relative}
+.eyebrow{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;display:flex;align-items:center;gap:.9rem}
+.eyebrow::before{content:"";width:2.2rem;height:1px;background:var(--gold);opacity:.7}
+.pad{padding-block:var(--pad)}
+.light{background:var(--ivory);color:var(--ink)}
+.dark{background:var(--navy);color:var(--ivory)}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.6vw,2.9rem);
+  line-height:1.2;letter-spacing:-.01em}
+.lede{color:var(--mut);font-size:1.1rem;max-width:62ch}
+.dark .lede{color:rgba(247,244,237,.75)}
+
+/* Fail-safe reveal model (same as landing): visible by default;
+   hidden state only under body.anim; JS fallback force-reveals. */
+.anim .reveal{opacity:0;transform:translateY(36px);filter:blur(7px);
+  transition:opacity 1.05s var(--ease),transform 1.05s var(--ease),filter 1.05s var(--ease);
+  transition-delay:var(--d,0s)}
+.anim .reveal.in-view{opacity:1;transform:none;filter:none}
+
+.btn{display:inline-flex;align-items:center;gap:.65rem;font-family:var(--sans);font-weight:700;
+  font-size:.92rem;letter-spacing:.05em;padding:.95rem 1.9rem;border-radius:2px;cursor:pointer;
+  border:1px solid transparent;transition:all .38s var(--ease)}
+.btn .arr{transition:transform .38s var(--ease)}
+.btn:hover .arr{transform:translateX(5px)}
+.btn-primary{background:var(--gold);color:#10101E}
+.btn-primary:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(184,134,46,.55)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:transparent;color:var(--gold);border-color:rgba(184,134,46,.55)}
+.btn-ghost:hover{background:var(--gold-soft);border-color:var(--gold);transform:translateY(-2px)}
+.btn-ghost.on-dark{color:var(--gold-2)}
+.btn-sm{padding:.62rem 1.3rem;font-size:.85rem}
+
+.site-nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .5s var(--ease),border-color .5s;
+  border-bottom:1px solid transparent}
+.site-nav.scrolled{background:rgba(12,12,22,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--line-d)}
+.site-nav nav{max-width:1360px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);height:84px;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.brand{display:flex;align-items:center}
+.brand img{height:26px;width:auto}
+.nav-links{display:flex;align-items:center;gap:2.4rem;list-style:none;margin:0}
+.nav-links a{font-size:.93rem;letter-spacing:.04em;color:rgba(247,244,237,.82);
+  transition:color .3s;position:relative;padding-block:.4rem}
+.nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.nav-links a:not(.btn):hover{color:var(--gold-2)}
+.nav-links a:not(.btn):hover::after{transform:scaleX(1);transform-origin:left}
+.nav-links a[aria-current="page"]{color:var(--gold-2)}
+.nav-links a[aria-current="page"]::after{transform:scaleX(1)}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;position:relative;z-index:110}
+.nav-toggle span{position:absolute;left:10px;width:24px;height:1.6px;background:var(--ivory);transition:all .4s var(--ease)}
+.nav-toggle span:nth-child(1){top:16px}.nav-toggle span:nth-child(2){top:22px}.nav-toggle span:nth-child(3){top:28px}
+.menu-open .nav-toggle span:nth-child(1){top:22px;transform:rotate(45deg);background:var(--gold)}
+.menu-open .nav-toggle span:nth-child(2){opacity:0}
+.menu-open .nav-toggle span:nth-child(3){top:22px;transform:rotate(-45deg);background:var(--gold)}
+
+/* ---------- page hero ---------- */
+.page-hero{background:radial-gradient(110% 100% at 50% 0%,#1e1e36 0%,var(--navy-2) 52%,var(--navy-3) 100%);
+  color:var(--ivory);padding:11.5rem 0 6.5rem;overflow:hidden}
+.page-hero .lattice-bg{position:absolute;inset:0;opacity:.4;pointer-events:none}
+.crumbs{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,244,237,.5);
+  margin-bottom:2.4rem;display:flex;gap:.8rem;align-items:center;position:relative;z-index:1}
+.crumbs a{color:rgba(247,244,237,.65);transition:color .3s}
+.crumbs a:hover{color:var(--gold-2)}
+.crumbs i{font-style:normal;color:var(--gold)}
+.page-hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,5.6vw,4.6rem);
+  line-height:1.1;letter-spacing:-.015em;max-width:14ch;position:relative;z-index:1}
+.page-hero .sub{margin-top:1.8rem;font-size:clamp(1.05rem,1.6vw,1.25rem);color:rgba(247,244,237,.78);
+  max-width:56ch;position:relative;z-index:1}
+.page-hero .sub b{color:var(--gold-2);font-weight:700}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.8rem;position:relative;z-index:1}
+
+/* ---------- trust stat bar ---------- */
+.trust-bar{background:var(--navy-3);border-block:1px solid var(--line-d)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;padding-block:3.2rem}
+.tstat{text-align:center;padding:1.2rem 1rem;border:1px dashed rgba(184,134,46,.4);border-radius:3px}
+.tstat b{display:block;font-family:var(--serif);font-weight:400;font-size:2rem;color:rgba(247,244,237,.35);line-height:1.1}
+.tstat span{display:block;margin-top:.5rem;font-size:.85rem;color:rgba(247,244,237,.65)}
+.tstat i{display:inline-block;margin-top:.7rem;font-style:normal;font-size:.6rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2);border:1px solid rgba(184,134,46,.4);
+  border-radius:2px;padding:.22rem .5rem}
+.trust-note{padding:0 0 2.6rem;text-align:center;font-size:.82rem;color:rgba(247,244,237,.45)}
+
+/* ---------- transparency ---------- */
+.transparency .narrow{padding-block:var(--pad)}
+.transparency h2{margin-bottom:1.8rem}
+.transparency p{color:var(--mut);font-size:1.1rem;margin-bottom:1.4em}
+.transparency p b{color:var(--ink)}
+.partner-mark{display:flex;align-items:center;gap:1.2rem;margin-top:2.6rem;padding-top:2.2rem;border-top:1px solid var(--line-l)}
+.partner-mark .dot{width:10px;height:10px;background:var(--gold);transform:rotate(45deg);flex:none}
+.partner-mark span{font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+
+/* ---------- three-path selector ---------- */
+.paths{background:var(--ivory-2)}
+.paths-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3.2rem}
+.path-card{background:#fff;border:1px solid var(--line-l);border-radius:3px;padding:2.4rem 2.1rem;
+  display:flex;flex-direction:column;gap:1rem;position:relative;overflow:hidden;
+  transition:transform .5s var(--ease),box-shadow .5s,border-color .5s}
+.path-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2));transform:scaleX(0);
+  transform-origin:left;transition:transform .55s var(--ease)}
+.path-card:hover{transform:translateY(-6px);border-color:rgba(184,134,46,.4);
+  box-shadow:0 24px 50px -26px rgba(26,26,46,.25)}
+.path-card:hover::before{transform:scaleX(1)}
+.path-card h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.3;letter-spacing:-.01em}
+.path-card p{color:var(--mut);font-size:.98rem;flex:1}
+.path-card .go{display:inline-flex;align-items:center;gap:.55rem;font-weight:700;font-size:.9rem;
+  color:var(--gold);letter-spacing:.04em}
+.path-card .go .arr{transition:transform .38s var(--ease)}
+.path-card:hover .go .arr{transform:translateX(6px)}
+</style>
+<style>
+/* ---------- free zone vs mainland ---------- */
+.decision{background:var(--ivory)}
+.decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:3.2rem}
+.track{background:#fff;border:1px solid var(--line-l);border-radius:3px;padding:2.6rem 2.3rem;position:relative;overflow:hidden}
+.track::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2))}
+.track h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;letter-spacing:-.01em;margin-bottom:.4rem}
+.track .tag{font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.6rem;display:block}
+.track .tline{font-family:var(--serif);font-style:italic;color:var(--mut);font-size:1.05rem;margin-bottom:1.8rem}
+.track ul{list-style:none;display:flex;flex-direction:column;gap:.95rem;margin-bottom:1.8rem}
+.track li{color:var(--mut);font-size:.99rem;padding-left:1.5rem;position:relative}
+.track li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
+  border:1.4px solid var(--gold);transform:rotate(45deg)}
+.track li b{color:var(--ink);font-weight:700}
+.track .more{font-size:.88rem;color:var(--gold);font-weight:700;letter-spacing:.04em;
+  display:inline-flex;align-items:center;gap:.5rem}
+.pending{font-size:.78rem;color:var(--mut);border-top:1px dashed var(--line-l);padding-top:1.1rem;margin-top:.4rem}
+.compare{margin-top:3.6rem;overflow-x:auto}
+.compare h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin-bottom:1.6rem;letter-spacing:-.01em}
+table.cmp{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line-l);min-width:640px}
+.cmp th,.cmp td{padding:1.05rem 1.3rem;text-align:left;border-bottom:1px solid var(--line-l);font-size:.97rem;vertical-align:top}
+.cmp thead th{background:var(--navy);color:var(--ivory);font-family:var(--serif);font-weight:400;font-size:1.02rem;letter-spacing:.02em}
+.cmp thead th:first-child{width:24%}
+.cmp tbody th{font-weight:700;color:var(--ink)}
+.cmp td{color:var(--mut)}
+.cmp tbody tr:last-child th,.cmp tbody tr:last-child td{border-bottom:0}
+.cmp tbody tr{transition:background .25s}
+.cmp tbody tr:hover{background:rgba(184,134,46,.05)}
+
+/* ---------- calculator ---------- */
+.calc{background:radial-gradient(90% 110% at 85% 0%,#1e1e34 0%,var(--navy-2) 55%,var(--navy-3) 100%);color:var(--ivory)}
+.calc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.calc h2{margin-bottom:1.2rem}
+.calc-form{display:flex;flex-direction:column;gap:1.7rem;margin-top:2.4rem}
+.field label{display:block;font-size:.74rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(247,244,237,.6);margin-bottom:.7rem}
+.field select{width:100%;appearance:none;background:rgba(247,244,237,.05);border:1px solid var(--line-d);
+  color:var(--ivory);font-family:var(--sans);font-size:1rem;padding:.95rem 2.8rem .95rem 1.1rem;border-radius:2px;
+  cursor:pointer;transition:border-color .3s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23D9AE5F' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1.1rem center}
+.field select:hover,.field select:focus{border-color:rgba(184,134,46,.55)}
+.field select option{color:#10101E;background:#fff}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.seg button{background:rgba(247,244,237,.05);border:1px solid var(--line-d);color:rgba(247,244,237,.75);
+  font-family:var(--sans);font-weight:700;font-size:.9rem;padding:.85rem .5rem;border-radius:2px;cursor:pointer;
+  transition:all .3s}
+.seg button:hover{border-color:rgba(184,134,46,.5);color:var(--gold-2)}
+.seg button.on{background:var(--gold);border-color:var(--gold);color:#10101E}
+.visa-row{display:flex;align-items:center;gap:1.4rem}
+.visa-row input[type=range]{flex:1;appearance:none;height:2px;background:rgba(247,244,237,.18);border-radius:2px;cursor:pointer}
+.visa-row input[type=range]::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;
+  background:var(--gold);border:3px solid var(--navy-2);box-shadow:0 0 0 1px var(--gold)}
+.visa-row input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--gold);border:3px solid var(--navy-2)}
+.visa-count{font-family:var(--serif);font-size:1.6rem;color:var(--gold-2);min-width:2.4rem;text-align:center;
+  font-variant-numeric:tabular-nums}
+.calc-out{border:1px solid rgba(184,134,46,.35);border-radius:3px;background:rgba(12,12,22,.5);
+  padding:clamp(2rem,3.5vw,2.8rem);position:sticky;top:110px}
+.calc-out::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.calc-out .co-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(247,244,237,.55);margin-bottom:1rem}
+.co-amount{font-family:var(--serif);font-size:clamp(1.9rem,3.4vw,2.7rem);color:var(--gold-2);
+  line-height:1.15;margin-bottom:.4rem;font-variant-numeric:tabular-nums}
+.co-scope{font-size:.88rem;color:rgba(247,244,237,.6);margin-bottom:1.6rem}
+.co-break{list-style:none;border-top:1px solid var(--line-d);margin-bottom:1.8rem}
+.co-break li{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line-d);
+  font-size:.92rem;color:rgba(247,244,237,.78)}
+.co-break li b{color:var(--ivory);font-weight:400;font-variant-numeric:tabular-nums}
+.co-actions{display:flex;flex-direction:column;gap:.8rem}
+.co-actions .btn{justify-content:center}
+.co-note{margin-top:1.4rem;font-size:.78rem;color:rgba(247,244,237,.45);line-height:1.6}
+.co-alt{margin-top:.4rem;font-size:.85rem;color:rgba(247,244,237,.6)}
+.co-alt b{color:var(--gold-2);font-weight:400;font-variant-numeric:tabular-nums}
+</style>
+<style>
+
+/* cinematic image banner (chapter break) */
+.img-banner{position:relative;height:clamp(340px,48vw,600px);overflow:hidden;margin:0}
+.img-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  animation:kb 34s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1) translateY(0)}to{transform:scale(1.07) translateY(-1.5%)}}
+.img-banner .ib-overlay{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(12,12,22,.6),rgba(12,12,22,.26) 45%,rgba(12,12,22,.64))}
+.img-banner figcaption{position:absolute;left:0;right:0;bottom:clamp(1.8rem,4vw,3rem);text-align:center;
+  font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,2.3vw,1.65rem);
+  color:rgba(247,244,237,.94);z-index:1;padding-inline:1.5rem}
+
+/* ---------- services catalog ---------- */
+.svc-band .band-icon{width:38px;height:38px;color:var(--gold);margin-bottom:1.3rem}
+.services{background:var(--ivory)}
+.svc-bands{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3.2rem}
+.svc-band{background:#fff;border:1px solid var(--line-l);border-radius:3px;padding:2.3rem 2.1rem}
+.svc-band h3{font-family:var(--serif);font-weight:400;font-size:1.32rem;margin-bottom:.4rem;letter-spacing:-.01em}
+.svc-band .band-tag{font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);display:block;margin-bottom:1.6rem}
+.svc-band ul{list-style:none}
+.svc-band li{border-bottom:1px solid var(--line-l)}
+.svc-band li:last-child{border-bottom:0}
+.svc-band a{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.85rem 0;
+  color:var(--mut);font-size:.97rem;transition:color .3s,padding-left .3s var(--ease)}
+.svc-band a:hover{color:var(--gold);padding-left:.4rem}
+.svc-band a .arr{color:var(--gold);opacity:0;transition:opacity .3s}
+.svc-band a:hover .arr{opacity:1}
+.svc-note{margin-top:2.4rem;font-size:.85rem;color:var(--mut);max-width:78ch}
+
+/* ---------- why ehive ---------- */
+.why{background:var(--ivory-2)}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem 2.4rem;margin-top:3.2rem}
+.why-item{display:flex;gap:1.4rem;padding:1.8rem 0;border-top:1px solid var(--line-l)}
+.why-item .n{font-family:var(--serif);color:var(--gold);font-size:1rem;flex:none;padding-top:.2rem;min-width:2rem}
+.why-item h3{font-family:var(--serif);font-weight:400;font-size:1.22rem;margin-bottom:.5rem;letter-spacing:-.01em}
+.why-item p{color:var(--mut);font-size:.98rem}
+.why-item.peak{grid-column:1/-1;background:#fff;border:1px solid rgba(184,134,46,.4);border-radius:3px;
+  padding:2.2rem 2.4rem}
+.why-item.peak h3{font-size:1.45rem}
+.why-item.peak .n{color:#fff;background:var(--gold);border-radius:50%;width:2rem;height:2rem;
+  display:flex;align-items:center;justify-content:center;min-width:2rem}
+
+/* ---------- contact strip ---------- */
+.contact-strip{background:var(--navy);color:var(--ivory)}
+.contact-strip .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:1.6rem;padding-block:3.4rem}
+.contact-strip h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.01em}
+.contact-strip p{color:rgba(247,244,237,.65);font-size:.95rem;margin-top:.3rem}
+.strip-actions{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* ---------- faq ---------- */
+.faq{background:var(--ivory)}
+.faq-list{margin-top:2.8rem;border-top:1px solid var(--line-l)}
+.faq details{border-bottom:1px solid var(--line-l)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;
+  gap:1.5rem;padding:1.6rem .2rem;font-family:var(--serif);font-size:1.2rem;letter-spacing:-.01em;
+  transition:color .3s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--gold)}
+.faq summary .pm{flex:none;width:30px;height:30px;border:1px solid var(--line-l);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--sans);
+  font-size:1.1rem;transition:all .35s var(--ease)}
+.faq details[open] summary .pm{background:var(--gold);border-color:var(--gold);color:#fff;transform:rotate(45deg)}
+.faq .ans{padding:0 3.5rem 1.8rem .2rem;color:var(--mut);font-size:1rem;max-width:72ch}
+
+/* ---------- page cta ---------- */
+.page-cta{background:linear-gradient(180deg,var(--navy-3),var(--navy));color:var(--ivory);text-align:center;overflow:hidden}
+.page-cta .lattice-bg{position:absolute;inset:0;opacity:.45;pointer-events:none}
+.page-cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.2vw,3.2rem);
+  letter-spacing:-.015em;margin-bottom:1.2rem}
+.page-cta .lede{margin:0 auto 2.6rem}
+.page-cta .cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;position:relative;z-index:1}
+
+/* ---------- footer (same as landing) ---------- */
+footer{background:var(--navy-3);color:rgba(247,244,237,.72);border-top:1px solid var(--line-d)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:clamp(2.5rem,5vw,4.5rem);
+  padding-block:clamp(4rem,7vw,6rem)}
+.foot-brand img{width:150px;height:auto;margin-bottom:1.6rem}
+.foot-brand p{font-size:.95rem;line-height:1.75;color:rgba(247,244,237,.6);max-width:34ch}
+.foot-col h4{font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:1.5rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.foot-col a{font-size:.95rem;color:rgba(247,244,237,.72);transition:color .3s}
+.foot-col a:hover{color:var(--gold-2)}
+.foot-loc{font-size:.95rem;line-height:1.8;color:rgba(247,244,237,.72)}
+.foot-loc span{display:block;font-size:.82rem;color:rgba(247,244,237,.45);margin-top:.3rem}
+.news-form{display:flex;margin-top:1.4rem;border:1px solid var(--line-d);border-radius:2px;overflow:hidden}
+.news-form input{flex:1;min-width:0;background:rgba(247,244,237,.04);border:0;color:var(--ivory);
+  padding:.8rem 1rem;font-family:var(--sans);font-size:.92rem}
+.news-form input::placeholder{color:rgba(247,244,237,.4)}
+.news-form button{background:var(--gold);color:#10101E;border:0;padding:0 1.2rem;font-weight:700;
+  font-family:var(--sans);font-size:.88rem;cursor:pointer;transition:background .3s}
+.news-form button:hover{background:var(--gold-2)}
+.foot-bottom{border-top:1px solid var(--line-d);padding-block:1.8rem;display:flex;flex-wrap:wrap;
+  align-items:center;justify-content:space-between;gap:1.2rem;font-size:.85rem;color:rgba(247,244,237,.45)}
+.foot-legal{display:flex;gap:1.8rem}
+.foot-legal a{transition:color .3s}
+.foot-legal a:hover{color:var(--gold-2)}
+.socials{display:flex;gap:1rem}
+.socials a{width:38px;height:38px;border:1px solid var(--line-d);border-radius:50%;display:flex;
+  align-items:center;justify-content:center;color:rgba(247,244,237,.65);transition:all .35s var(--ease)}
+.socials a:hover{border-color:var(--gold);color:var(--gold-2);transform:translateY(-3px)}
+.socials svg{width:16px;height:16px}
+
+@media (max-width:1020px){
+  .paths-grid,.svc-bands{grid-template-columns:1fr;max-width:560px;margin-inline:auto}
+  .paths-grid{margin-top:3.2rem}
+  .svc-bands{margin-top:3.2rem}
+  .decision-grid,.calc-grid,.why-grid{grid-template-columns:1fr}
+  .calc-out{position:static}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .nav-toggle{display:block}
+  .nav-links{position:fixed;inset:0;background:rgba(12,12,22,.97);backdrop-filter:blur(18px);
+    flex-direction:column;justify-content:center;gap:2.6rem;transform:translateY(-102%);
+    transition:transform .55s var(--ease);z-index:105}
+  .menu-open .nav-links{transform:translateY(0)}
+  .nav-links a{font-size:1.35rem;font-family:var(--serif)}
+  .nav-links .btn{font-family:var(--sans);font-size:1rem}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .seg{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:2.6rem}
+  .page-cta .cta-row .btn{width:100%;justify-content:center}
+  .page-cta .cta-row{flex-direction:column;max-width:380px;margin-inline:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .anim .reveal{opacity:1;transform:none;filter:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-nav" id="siteNav">
+  <nav aria-label="Primary">
+    <a class="brand" href="index.html" aria-label="eHive — home">
+      <img src="assets/ehive-wordmark.png" alt="eHive" width="146" height="26">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="business-setup.html" aria-current="page">Business Setup</a></li>
+      <li><a href="consulting.html">Consulting</a></li>
+      <li><a href="circle.html">eHive Circle</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a class="btn btn-primary btn-sm" href="get-started.html">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ================= HERO (blueprint 3.1) ================= -->
+<section class="page-hero" aria-labelledby="page-h">
+  <svg class="lattice-bg" viewBox="0 0 1200 500" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#B8862E" stroke-width=".7" opacity=".3">
+      <path d="M100 260 260 150 430 230 590 110 770 210 940 130 1100 240"/>
+      <path d="M180 400 350 300 530 380 710 280 900 390 1070 310"/>
+      <path d="M260 150 350 300M430 230 530 380M590 110 710 280M770 210 900 390M940 130 1070 310M100 260 180 400"/>
+    </g>
+    <g fill="#D9AE5F" opacity=".8">
+      <circle cx="100" cy="260" r="2.5"/><circle cx="260" cy="150" r="3.5"/><circle cx="430" cy="230" r="2.5"/>
+      <circle cx="590" cy="110" r="4"/><circle cx="770" cy="210" r="2.5"/><circle cx="940" cy="130" r="3.5"/>
+      <circle cx="1100" cy="240" r="2.5"/><circle cx="180" cy="400" r="2.5"/><circle cx="350" cy="300" r="3.5"/>
+      <circle cx="530" cy="380" r="2.5"/><circle cx="710" cy="280" r="3.5"/><circle cx="900" cy="390" r="2.5"/>
+      <circle cx="1070" cy="310" r="3"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html">Home</a><i>·</i><span>Business Setup</span></p>
+    <p class="eyebrow">Pillar 01 — Start</p>
+    <h1 id="page-h">Start on solid ground.</h1>
+    <p class="sub">Company formation, licensing, visas, and the operational infrastructure to get
+      from idea to incorporated — powered by <b>Emirates First</b>, delivered through eHive.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#calculator">Estimate your setup cost <span class="arr">→</span></a>
+      <!-- PLACEHOLDER: routes to /get-started (Business Setup path) at Stage 5 -->
+      <a class="btn btn-ghost on-dark" href="book.html?type=setup">Book a setup consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST STAT BAR (blueprint 3.1) =================
+     PLACEHOLDER: real Emirates First figures required (years operating,
+     businesses formed, team size, nationalities served) — blueprint
+     open item 1. Do not populate with invented numbers. -->
+<section class="trust-bar" aria-label="Operating partner credentials">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="tstat reveal"><b>—</b><span>Years operating in the UAE</span><i>Placeholder</i></div>
+      <div class="tstat reveal" style="--d:.08s"><b>—</b><span>Businesses formed</span><i>Placeholder</i></div>
+      <div class="tstat reveal" style="--d:.16s"><b>—</b><span>Specialists on the ground</span><i>Placeholder</i></div>
+      <div class="tstat reveal" style="--d:.24s"><b>—</b><span>Nationalities served</span><i>Placeholder</i></div>
+    </div>
+    <p class="trust-note">Reserved for Emirates First&rsquo;s verified operating figures — this bar launches with real numbers or not at all.</p>
+  </div>
+</section>
+
+<!-- ================= TRANSPARENCY BLOCK (blueprint 3.1) ================= -->
+<section class="transparency light" aria-labelledby="transp-h">
+  <div class="narrow pad">
+    <p class="eyebrow reveal">The partnership, plainly</p>
+    <h2 class="h2 reveal" style="--d:.08s" id="transp-h">Who does what — no mystery back office.</h2>
+    <!-- PLACEHOLDER: final partner-approved wording pending. Positioning below
+         is drafted from blueprint 3.1 and must be confirmed with Emirates First. -->
+    <p class="reveal" style="--d:.16s">eHive&rsquo;s Business Setup pillar is built on top of
+      <b>Emirates First</b> — an established UAE business setup operator. They bring the operating
+      infrastructure: licensing relationships, processing capacity, and on-the-ground execution.</p>
+    <p class="reveal" style="--d:.24s">eHive is your single point of contact — scoping, coordination,
+      and the wider ecosystem around your company. One engagement, one team, and nothing for you
+      to piece together on your own.</p>
+    <div class="partner-mark reveal" style="--d:.32s">
+      <span class="dot" aria-hidden="true"></span>
+      <span>eHive × Emirates First — one roof</span>
+    </div>
+  </div>
+</section>
+<!-- ================= THREE-PATH SELECTOR (blueprint 3.2) ================= -->
+<section class="paths light" aria-labelledby="paths-h">
+  <div class="wrap pad">
+    <p class="eyebrow reveal">Where do we start?</p>
+    <h2 class="h2 reveal" style="--d:.08s" id="paths-h">What&rsquo;s your business goal?</h2>
+    <div class="paths-grid">
+      <a class="path-card reveal" style="--d:.05s" href="#decision">
+        <h3>I want to start a company</h3>
+        <p>Free zone or mainland — the one decision everything else hangs on, laid out side by side.</p>
+        <span class="go">Compare the paths <span class="arr">→</span></span>
+      </a>
+      <a class="path-card reveal" style="--d:.15s" href="#services">
+        <h3>I need ongoing corporate services</h3>
+        <p>Banking, tax, compliance, visas, and the operational services that keep a company running.</p>
+        <span class="go">Browse the catalog <span class="arr">→</span></span>
+      </a>
+      <a class="path-card reveal" style="--d:.25s" href="#calculator">
+        <h3>I&rsquo;m not sure yet</h3>
+        <p>Get an indicative cost in under a minute, or talk it through with a setup expert first.</p>
+        <span class="go">Estimate my cost <span class="arr">→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- chapter image: solidity / cornerstone (AI-generated brand art, navy-gold) -->
+<figure class="img-banner">
+  <img src="assets/img/img-business-setup.jpg" alt="Layered stone platforms rising through fog, a golden cornerstone lit at the base">
+  <div class="ib-overlay" aria-hidden="true"></div>
+  <figcaption>From idea to incorporated.</figcaption>
+</figure>
+
+<!-- ================= FREE ZONE vs MAINLAND (blueprint 3.3) ================= -->
+<section class="decision light" id="decision" aria-labelledby="decision-h">
+  <div class="wrap pad">
+    <p class="eyebrow reveal">The core decision</p>
+    <h2 class="h2 reveal" style="--d:.08s" id="decision-h">Free zone or mainland.</h2>
+    <p class="lede reveal" style="--d:.16s">The single most important choice a new entrepreneur makes
+      in the UAE. Each path gets its own dedicated track — here&rsquo;s the honest comparison first.</p>
+
+    <div class="decision-grid">
+      <article class="track reveal" style="--d:.1s">
+        <span class="tag">Track A</span>
+        <h3>Free Zone</h3>
+        <p class="tline">Fast, structured, and built for international founders.</p>
+        <ul>
+          <li><b>100% foreign ownership</b>, with full repatriation of capital and profits</li>
+          <li><b>Typically faster setup</b> — streamlined registration inside the zone</li>
+          <li><b>Business activities</b> matched to the right zone for your license</li>
+          <li><b>Zone options &amp; indicative pricing</b> compared before you commit</li>
+          <li><b>Registration process</b>, step by step, handled end to end</li>
+          <li><b>Visa eligibility and processing</b> for you and your team</li>
+        </ul>
+        <!-- PLACEHOLDER: /business-setup/free-zone detail page (zone options,
+             indicative pricing, step-by-step process) — pending Emirates First
+             zone list and rate card. Blueprint open item 1. -->
+        <span class="more">Free Zone track — detail page follows <span class="arr">→</span></span>
+        <p class="pending">Zone shortlist &amp; indicative pricing pending the Emirates First rate card.</p>
+      </article>
+
+      <article class="track reveal" style="--d:.2s">
+        <span class="tag">Track B</span>
+        <h3>Mainland</h3>
+        <p class="tline">The whole of the UAE as your market, from day one.</p>
+        <ul>
+          <li><b>Wider market access</b> — trade directly anywhere in the UAE</li>
+          <li><b>Business activities</b> across the broadest license scope</li>
+          <li><b>Licence types</b> matched to what you actually do</li>
+          <li><b>Structuring requirements</b> explained plainly, including any activity-specific rules</li>
+          <li><b>Visa allocation</b> scaled to your office and growth plan</li>
+        </ul>
+        <!-- PLACEHOLDER: /business-setup/mainland detail page — pending partner content -->
+        <span class="more">Mainland track — detail page follows <span class="arr">→</span></span>
+        <p class="pending">Licence types &amp; structuring detail pending partner confirmation.</p>
+      </article>
+    </div>
+
+    <div class="compare reveal" style="--d:.1s">
+      <h3>Free zone vs. mainland at a glance</h3>
+      <table class="cmp">
+        <thead>
+          <tr><th scope="col"></th><th scope="col">Free Zone</th><th scope="col">Mainland</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Foreign ownership</th>
+            <td>100%, always</td>
+            <td>Up to 100% for most activities; some activities carry specific requirements</td>
+          </tr>
+          <tr>
+            <th scope="row">Market access</th>
+            <td>Inside the zone and internationally; UAE-wide trade via local arrangements</td>
+            <td>Direct trade across the entire UAE market</td>
+          </tr>
+          <tr>
+            <th scope="row">Setup speed</th>
+            <td>Typically faster, streamlined within the zone</td>
+            <td>Varies by activity and approvals</td>
+          </tr>
+          <tr>
+            <th scope="row">Office</th>
+            <td>Flexi-desk options keep early costs low</td>
+            <td>Physical office typically required (Ejari)</td>
+          </tr>
+          <tr>
+            <th scope="row">Corporate tax</th>
+            <td>9% above AED 375,000 profit; qualifying free zone income may access 0%, subject to conditions</td>
+            <td>9% above AED 375,000 profit</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COST CALCULATOR (blueprint 3.4) =================
+     PLACEHOLDER PRICING LOGIC: the formula below is illustrative only,
+     pending the real Emirates First rate card (blueprint open item 1).
+     It exists to prove the interaction — not to quote real prices. -->
+<section class="calc" id="calculator" aria-labelledby="calc-h">
+  <div class="wrap pad">
+    <div class="calc-grid">
+      <div>
+        <p class="eyebrow reveal">The #1 question</p>
+        <h2 class="h2 reveal" style="--d:.08s" id="calc-h">How much? Get an instant estimate.</h2>
+        <p class="lede reveal" style="--d:.16s">Three answers in, an indicative range out.
+          No email required, no back-and-forth — a real number before you ever have to ask for one.</p>
+
+        <form class="calc-form reveal" style="--d:.24s" id="calcForm" aria-label="Setup cost estimator">
+          <div class="field">
+            <label for="cf-activity">Business activity</label>
+            <select id="cf-activity">
+              <option value="consulting">Consulting &amp; professional services</option>
+              <option value="trading">Trading &amp; general trading</option>
+              <option value="ecommerce">E-commerce</option>
+              <option value="tech">Technology &amp; software</option>
+              <option value="fnb">Food &amp; beverage</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label id="cf-jur-label">Jurisdiction preference</label>
+            <div class="seg" role="group" aria-labelledby="cf-jur-label">
+              <button type="button" class="on" data-jur="fz">Free zone</button>
+              <button type="button" data-jur="ml">Mainland</button>
+              <button type="button" data-jur="both">Not sure</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cf-visas">Residence visas needed</label>
+            <div class="visa-row">
+              <input type="range" id="cf-visas" min="0" max="6" value="2" step="1"
+                     aria-describedby="cf-visas-out">
+              <span class="visa-count" id="cf-visas-out">2</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cf-office">Office arrangement</label>
+            <select id="cf-office">
+              <option value="flexi">Flexi-desk</option>
+              <option value="shared">Shared office</option>
+              <option value="private">Private office</option>
+              <option value="none">No office yet</option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <div class="calc-out reveal" style="--d:.2s" aria-live="polite">
+        <p class="co-eyebrow">Indicative estimate</p>
+        <p class="co-amount" id="coAmount">AED —</p>
+        <p class="co-scope" id="coScope"></p>
+        <ul class="co-break" id="coBreak"></ul>
+        <p class="co-alt" id="coAlt" hidden></p>
+        <div class="co-actions">
+          <!-- PLACEHOLDER: routes to /get-started (Business Setup path) at Stage 5 -->
+          <a class="btn btn-primary" href="get-started.html?door=business">Get the full quote</a>
+          <!-- PLACEHOLDER: WhatsApp number needed from eHive before this works -->
+          <a class="btn btn-ghost on-dark" href="https://wa.me/971500000000">Speak to a setup expert</a>
+        </div>
+        <p class="co-note">Indicative estimate only — pricing logic is a placeholder pending the
+          Emirates First rate card. Final quotes are scoped per case, with no hidden fees.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================= CORPORATE SERVICES (blueprint 3.5) ================= -->
+<section class="services light" id="services" aria-labelledby="svc-h">
+  <div class="wrap pad">
+    <p class="eyebrow reveal">Beyond formation</p>
+    <h2 class="h2 reveal" style="--d:.08s" id="svc-h">Corporate services, in three bands.</h2>
+    <p class="lede reveal" style="--d:.16s">What a company needs after it exists — grouped the way
+      a founder&rsquo;s needs actually evolve.</p>
+
+    <div class="svc-bands">
+      <div class="svc-band reveal" style="--d:.05s">
+        <span class="band-tag">Essential</span>
+        <svg class="band-icon" viewBox="0 0 38 38" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 3l12 4.5v9c0 8.5-5.4 14.4-12 18.5C12.4 30.9 7 25 7 16.5v-9z"/><path d="M13.5 19.5l4 4 7.5-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Keep the company compliant</h3>
+        <ul>
+          <!-- PLACEHOLDER: individual service pages pending Emirates First catalog -->
+          <li><a href="#">Bank account opening <span class="arr">→</span></a></li>
+          <li><a href="#">Accounting &amp; bookkeeping <span class="arr">→</span></a></li>
+          <li><a href="#">Corporate tax &amp; VAT <span class="arr">→</span></a></li>
+          <li><a href="#">Compliance (UBO / ESR) <span class="arr">→</span></a></li>
+          <li><a href="#">Health insurance <span class="arr">→</span></a></li>
+        </ul>
+      </div>
+      <div class="svc-band reveal" style="--d:.15s">
+        <span class="band-tag">Operational</span>
+        <svg class="band-icon" viewBox="0 0 38 38" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="19" cy="19" r="6.5"/><path d="M19 4v5M19 29v5M4 19h5M29 19h5M8.4 8.4l3.5 3.5M26.1 26.1l3.5 3.5M29.6 8.4l-3.5 3.5M11.9 26.1l-3.5 3.5" stroke-linecap="round"/></svg>
+        <h3>Run day to day</h3>
+        <ul>
+          <li><a href="#">Legal services <span class="arr">→</span></a></li>
+          <li><a href="#">Mail management <span class="arr">→</span></a></li>
+          <li><a href="#">Virtual receptionist <span class="arr">→</span></a></li>
+          <li><a href="#">IT services <span class="arr">→</span></a></li>
+        </ul>
+      </div>
+      <div class="svc-band reveal" style="--d:.25s">
+        <span class="band-tag">Support &amp; Growth</span>
+        <svg class="band-icon" viewBox="0 0 38 38" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="19" cy="19" r="15"/><path d="M24.5 13.5l-3.2 7.8-7.8 3.2 3.2-7.8z" stroke-linejoin="round"/><circle cx="19" cy="19" r="1.4" fill="currentColor" stroke="none"/></svg>
+        <h3>Go further</h3>
+        <ul>
+          <li><a href="#">Golden Visa <span class="arr">→</span></a></li>
+          <li><a href="#">PRO services <span class="arr">→</span></a></li>
+          <li><a href="#">Trademark &amp; copyright registration <span class="arr">→</span></a></li>
+          <li><a href="#">Will preparation <span class="arr">→</span></a></li>
+          <li><a href="#">Tourist visa <span class="arr">→</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- PLACEHOLDER: catalog structure adopted from an established UAE operator
+         taxonomy (blueprint 3.5); actual service list, inclusions and pricing
+         to be confirmed from Emirates First — blueprint open item 1. -->
+    <p class="svc-note reveal">Catalog structure shown for review — the final service list, inclusions,
+      and pricing are confirmed with Emirates First before launch. Each service gets its own short page:
+      what it is, who needs it, what&rsquo;s included, and a direct CTA.</p>
+  </div>
+</section>
+
+<!-- ================= WHY EHIVE (blueprint 3.6) ================= -->
+<section class="why light" aria-labelledby="why-h">
+  <div class="wrap pad">
+    <p class="eyebrow reveal">Why eHive</p>
+    <h2 class="h2 reveal" style="--d:.08s" id="why-h">Formation is the beginning, not the transaction.</h2>
+    <div class="why-grid">
+      <div class="why-item reveal" style="--d:.05s">
+        <span class="n">01</span>
+        <div>
+          <h3>Backed by an established operator</h3>
+          <p>Emirates First infrastructure — not a startup back office figuring it out as it goes.</p>
+        </div>
+      </div>
+      <div class="why-item reveal" style="--d:.1s">
+        <span class="n">02</span>
+        <div>
+          <h3>End-to-end, not fragmented</h3>
+          <p>Formation, licensing, and visas handled as one process, under one roof.</p>
+        </div>
+      </div>
+      <div class="why-item reveal" style="--d:.15s">
+        <span class="n">03</span>
+        <div>
+          <h3>A dedicated expert per client</h3>
+          <p>One person who knows your case — not a call center reading a script.</p>
+        </div>
+      </div>
+      <div class="why-item reveal" style="--d:.2s">
+        <span class="n">04</span>
+        <div>
+          <h3>Government relationships</h3>
+          <p>Working relationships that speed up licensing and registration where it matters.</p>
+        </div>
+      </div>
+      <div class="why-item peak reveal" style="--d:.25s">
+        <span class="n">05</span>
+        <div>
+          <h3>The only formation partner that also hands you a strategy team and a founder community the moment you&rsquo;re licensed</h3>
+          <p>Your license comes with an ecosystem attached — Consulting for what to do next,
+            and the Circle for who to build it with. That&rsquo;s the whole reason this pillar sits inside eHive.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTANT CONTACT (blueprint 3.7) ================= -->
+<section class="contact-strip" aria-label="Talk to a setup expert">
+  <div class="wrap">
+    <div>
+      <h3>Formation questions are often urgent. Get a human answer, fast.</h3>
+      <p>&ldquo;Can I do this activity in a free zone?&rdquo; — ask directly, or book a time that suits you.</p>
+    </div>
+    <div class="strip-actions">
+      <!-- PLACEHOLDER: WhatsApp business number needed before launch -->
+      <a class="btn btn-primary" href="https://wa.me/971500000000">WhatsApp a setup expert</a>
+      <!-- PLACEHOLDER: routes to /get-started at Stage 5 -->
+      <a class="btn btn-ghost on-dark" href="book.html?type=setup">Book a meeting</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ (blueprint 3.8) ================= -->
+<section class="faq light" aria-labelledby="faq-h">
+  <div class="narrow pad">
+    <p class="eyebrow reveal">Questions, answered</p>
+    <h2 class="h2 reveal" style="--d:.08s" id="faq-h">The short version.</h2>
+    <div class="faq-list reveal" style="--d:.16s">
+      <details>
+        <summary>Should I choose a free zone or the mainland?<span class="pm" aria-hidden="true">+</span></summary>
+        <p class="ans">It depends on where your customers are. If you mainly serve international clients
+          or want the fastest, leanest start, a free zone usually wins. If you need to trade directly
+          across the UAE market from day one, mainland is built for that. The comparison table above
+          covers the trade-offs — and a fifteen-minute call settles it for your specific case.</p>
+      </details>
+      <details>
+        <summary>How long does setup take?<span class="pm" aria-hidden="true">+</span></summary>
+        <p class="ans">Timelines vary by jurisdiction, activity, and approvals — typically days to a few
+          weeks from documents-in-hand to license issued. Visa processing adds its own window after that.
+          Your dedicated expert gives you a realistic timeline for your specific case before anything begins.</p>
+      </details>
+      <details>
+        <summary>What&rsquo;s included in a quote — and what&rsquo;s billed separately?<span class="pm" aria-hidden="true">+</span></summary>
+        <p class="ans">Every quote itemizes the license, registration, visas, and service fees separately,
+          so you can see exactly what each line costs. Government and third-party fees are passed through
+          transparently. No bundles designed to hide margins — itemized by default.</p>
+      </details>
+      <details>
+        <summary>What about corporate tax?<span class="pm" aria-hidden="true">+</span></summary>
+        <p class="ans">The UAE charges 9% corporate tax on profits above AED 375,000 — that applies in both
+          free zones and the mainland. Qualifying free zone income may access a 0% rate, subject to
+          conditions. Our accounting and corporate tax services keep you registered, filed, and compliant
+          from year one.</p>
+      </details>
+      <details>
+        <summary>Do I need to be in the UAE to set up?<span class="pm" aria-hidden="true">+</span></summary>
+        <p class="ans">Much of the process can be handled remotely — scoping, documentation, and license
+          application. Some visa steps, like medical screening and Emirates ID biometrics, require you
+          to be in the country. We sequence everything so your time on the ground is used efficiently.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA (blueprint 3.9) ================= -->
+<section class="page-cta" aria-labelledby="bs-cta-h">
+  <svg class="lattice-bg" viewBox="0 0 1200 420" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#B8862E" stroke-width=".7" opacity=".35">
+      <path d="M120 210 260 120 420 190 580 90 760 180 930 110 1080 200"/>
+      <path d="M180 330 340 250 520 320 700 240 890 330 1060 260"/>
+    </g>
+    <g fill="#D9AE5F">
+      <circle cx="120" cy="210" r="3"/><circle cx="260" cy="120" r="4"/><circle cx="420" cy="190" r="3"/>
+      <circle cx="580" cy="90" r="4.5"/><circle cx="760" cy="180" r="3"/><circle cx="930" cy="110" r="4"/>
+      <circle cx="1080" cy="200" r="3"/><circle cx="340" cy="250" r="4"/><circle cx="700" cy="240" r="4"/>
+      <circle cx="890" cy="330" r="3"/>
+    </g>
+  </svg>
+  <div class="wrap pad" style="position:relative;z-index:1">
+    <h2 class="reveal" id="bs-cta-h">Start on solid ground.</h2>
+    <p class="lede reveal" style="--d:.12s">Tell us what you&rsquo;re building — we&rsquo;ll scope it,
+      quote it, and get you from idea to incorporated.</p>
+    <div class="cta-row reveal" style="--d:.22s">
+      <!-- PLACEHOLDER: routes to /get-started (Business Setup path) at Stage 5 -->
+      <a class="btn btn-primary" href="book.html?type=setup">Book a Setup Consultation</a>
+      <a class="btn btn-ghost on-dark" href="#calculator">Estimate my cost first</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/ehive-full.png" alt="eHive — Build. Belong. Become." width="150">
+        <p>To advance the human race by enabling individuals and organisations to do better —
+          sustainably, relevantly, and beneficially.</p>
+      </div>
+      <div class="foot-col">
+        <h4>The Ecosystem</h4>
+        <ul>
+          <li><a href="business-setup.html">Business Setup</a></li>
+          <!-- PLACEHOLDER: routes pending Stage 4–5 -->
+          <li><a href="consulting.html">Consulting</a></li>
+          <li><a href="circle.html">eHive Circle</a></li>
+          <li><a href="#calculator">Cost Calculator</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights — The Hive Journal</a></li>
+          <li><a href="#">Join the Network</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <p class="foot-loc">Dubai, UAE<span>Expanding across the region</span></p>
+        <!-- PLACEHOLDER: newsletter signup not wired yet (Stage 5) -->
+        <form class="news-form" action="#" method="post" aria-label="Newsletter signup">
+          <label class="visually-hidden" for="news-email">Email address</label>
+          <input id="news-email" type="email" placeholder="Your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> eHive. All rights reserved.</span>
+      <div class="foot-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="socials">
+        <!-- PLACEHOLDER: social profile URLs to be supplied -->
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.16h4.52V23H.24zM8.34 8.16h4.33v2.03h.06c.6-1.14 2.08-2.34 4.28-2.34C21.6 7.85 23 10.3 23 13.98V23h-4.51v-7.96c0-1.9-.03-4.34-2.65-4.34-2.65 0-3.05 2.07-3.05 4.2V23H8.34z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  document.body.classList.add("anim");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- nav ---- */
+  var nav = document.getElementById("siteNav");
+  function onScroll(){ nav.classList.toggle("scrolled", window.scrollY > 40); }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  var toggle = document.getElementById("navToggle");
+  toggle.addEventListener("click", function(){
+    var open = document.body.classList.toggle("menu-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.querySelectorAll(".nav-links a").forEach(function(a){
+    a.addEventListener("click", function(){
+      document.body.classList.remove("menu-open");
+      toggle.setAttribute("aria-expanded","false");
+    });
+  });
+
+  /* ---- scroll reveals (fail-safe: IO-dead fallback reveals all) ---- */
+  var ioAlive = false;
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      ioAlive = true;
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in-view"); io.unobserve(e.target); }
+      });
+    }, {threshold:.14, rootMargin:"0px 0px -6% 0px"});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    ioAlive = true;
+    reveals.forEach(function(el){ el.classList.add("in-view"); });
+  }
+  setTimeout(function(){
+    if (!ioAlive){
+      reveals.forEach(function(el){ el.classList.add("in-view"); });
+    }
+  }, 2600);
+
+  /* ================= cost calculator =================
+     PLACEHOLDER PRICING LOGIC — illustrative only, pending the
+     real Emirates First rate card (blueprint open item 1). */
+  var RATE = {
+    fz: { base: 11500, visa: 3200, name: "Free zone" },
+    ml: { base: 18500, visa: 3800, name: "Mainland" }
+  };
+  var OFFICE = { flexi: 4500, shared: 9500, private: 19000, none: 0 };
+  var OFFICE_NAME = { flexi: "flexi-desk", shared: "shared office", private: "private office", none: "no office yet" };
+  var ACT = { consulting: 1, trading: 1.15, ecommerce: 1.1, tech: 1, fnb: 1.3, other: 1 };
+  var ACT_NAME = {
+    consulting: "consulting & professional services", trading: "trading & general trading",
+    ecommerce: "e-commerce", tech: "technology & software", fnb: "food & beverage", other: "other activity"
+  };
+
+  var activity = document.getElementById("cf-activity"),
+      office   = document.getElementById("cf-office"),
+      visas    = document.getElementById("cf-visas"),
+      visasOut = document.getElementById("cf-visas-out"),
+      jur      = "fz";
+
+  var coAmount = document.getElementById("coAmount"),
+      coScope  = document.getElementById("coScope"),
+      coBreak  = document.getElementById("coBreak"),
+      coAlt    = document.getElementById("coAlt");
+
+  function fmt(n){ return n.toLocaleString("en-US"); }
+  function round500(n){ return Math.round(n / 500) * 500; }
+
+  function estimate(j){
+    var r = RATE[j];
+    var offKey = office.value;
+    var offCost = OFFICE[offKey];
+    if (j === "ml" && offKey === "none"){ offCost = OFFICE.flexi; } /* mainland typically requires Ejari */
+    var v = parseInt(visas.value, 10);
+    var base = r.base, visaCost = r.visa * v;
+    var sub = (base + visaCost + offCost);
+    var mult = ACT[activity.value];
+    var total = sub * mult;
+    return {
+      low: round500(total * .95), high: round500(total * 1.25),
+      base: base, visaCost: visaCost, offCost: offCost, mult: mult, visas: v
+    };
+  }
+
+  function render(){
+    visasOut.textContent = visas.value;
+    var main = (jur === "both") ? "fz" : jur;   /* "not sure" shows free zone, with mainland compared below */
+    var e = estimate(main);
+    var scopeRest = e.visas + (e.visas === 1 ? " visa" : " visas") +
+      " · " + OFFICE_NAME[office.value] + " · " + ACT_NAME[activity.value];
+    coAmount.textContent = "AED " + fmt(e.low) + " – " + fmt(e.high);
+    coScope.textContent = RATE[main].name + " · " + scopeRest;
+    var rows = "";
+    rows += "<li><span>License &amp; registration</span><b>AED " + fmt(e.base) + "</b></li>";
+    rows += "<li><span>Residence visas × " + e.visas + "</span><b>AED " + fmt(e.visaCost) + "</b></li>";
+    rows += "<li><span>Office (" + OFFICE_NAME[office.value] + ")</span><b>AED " + fmt(e.offCost) + "</b></li>";
+    if (e.mult !== 1){
+      rows += "<li><span>Activity-specific requirements</span><b>× " + e.mult.toFixed(2) + "</b></li>";
+    }
+    coBreak.innerHTML = rows;
+    if (jur === "both"){
+      var m = estimate("ml");
+      coAlt.hidden = false;
+      coAlt.innerHTML = "Mainland path for the same setup: <b>AED " + fmt(m.low) + " – " + fmt(m.high) + "</b>";
+    } else {
+      coAlt.hidden = true;
+    }
+  }
+
+  document.querySelectorAll(".seg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll(".seg button").forEach(function(x){ x.classList.remove("on"); });
+      b.classList.add("on");
+      jur = b.getAttribute("data-jur");
+      render();
+    });
+  });
+  [activity, office].forEach(function(el){ el.addEventListener("change", render); });
+  visas.addEventListener("input", render);
+  render();
+
+  /* ---- footer year ---- */
+  /* ---- newsletter capture (Stage 5: placeholder endpoint — wires to ESP at go-live) ---- */
+  document.querySelectorAll(".news-form, .sub-form").forEach(function(f){
+    f.addEventListener("submit", function(e){
+      e.preventDefault();
+      var inp = f.querySelector('input[type="email"]');
+      if (!inp || !/.+@.+\..+/.test(inp.value.trim())){ if (inp) inp.focus(); return; }
+      f.innerHTML = '<p style="margin:0;color:var(--gold-2);font-size:.92rem">You\u2019re on the list — watch your inbox.</p>';
+    });
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

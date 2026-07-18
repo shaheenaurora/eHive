@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eHive — Build. Belong. Become.</title>
+<meta name="description" content="eHive is a UAE-based entrepreneurial ecosystem. One ecosystem — everything a business needs to start, run, scale, and exit. Build. Belong. Become.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 27 9.5v13L16 29 5 22.5v-13z' fill='none' stroke='%23B8862E' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23B8862E'/%3E%3C/svg%3E">
+<style>
+/* eHive design system — defined by this page (Stage 2 embedded).
+   Palette: navy #1A1A2E, gold #B8862E. Type: Georgia headings, Calibri body.
+   NOTE: Circle tier names used on this page are working titles, pending trademark clearance. */
+:root{
+  --navy:#1A1A2E; --navy-2:#151527; --navy-3:#0C0C16;
+  --gold:#B8862E; --gold-2:#D9AE5F; --gold-soft:rgba(184,134,46,.16);
+  --ivory:#F7F4ED; --ivory-2:#EFEBE0;
+  --ink:#23233C; --mut:#61617C;
+  --line-l:rgba(26,26,46,.14); --line-d:rgba(247,244,237,.13);
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:Calibri,'Segoe UI',Candara,'Helvetica Neue',Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(6rem,11vw,9.5rem);
+  --max:1220px; --narrow:780px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:var(--sans);background:var(--navy-3);color:var(--ivory);
+  font-size:1.0625rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--gold);color:var(--navy-3)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--navy-3)}
+::-webkit-scrollbar-thumb{background:#3a3a52;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;top:-60px;left:1rem;z-index:200;background:var(--gold);color:var(--navy-3);
+  padding:.6rem 1.1rem;border-radius:2px;transition:top .3s;font-size:.9rem}
+.skip:focus{top:1rem}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:clamp(1.25rem,4.5vw,3rem)}
+.narrow{max-width:var(--narrow);margin:0 auto;padding-inline:clamp(1.25rem,4.5vw,3rem)}
+section{position:relative}
+.eyebrow{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;display:flex;align-items:center;gap:.9rem}
+.eyebrow::before{content:"";width:2.2rem;height:1px;background:var(--gold);opacity:.7}
+.light{background:var(--ivory);color:var(--ink)}
+.pad{padding-block:var(--pad)}
+/* Fail-safe reveal model: content is visible by default. The hidden
+   state applies only once JS marks the page as animation-capable
+   (body.anim), and a JS fallback timer force-reveals everything
+   ~2.6s after load in case the observer ever fails to fire. */
+.anim .reveal{opacity:0;transform:translateY(36px);filter:blur(7px);
+  transition:opacity 1.05s var(--ease),transform 1.05s var(--ease),filter 1.05s var(--ease);
+  transition-delay:var(--d,0s)}
+.anim .reveal.in-view{opacity:1;transform:none;filter:none}
+
+.btn{display:inline-flex;align-items:center;gap:.65rem;font-family:var(--sans);font-weight:700;
+  font-size:.92rem;letter-spacing:.05em;padding:.95rem 1.9rem;border-radius:2px;cursor:pointer;
+  border:1px solid transparent;transition:all .38s var(--ease);position:relative;overflow:hidden}
+.btn .arr{transition:transform .38s var(--ease)}
+.btn:hover .arr{transform:translateX(5px)}
+.btn-primary{background:var(--gold);color:#10101E}
+.btn-primary:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(184,134,46,.55)}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{background:var(--navy);color:var(--ivory)}
+.btn-secondary:hover{background:#23233f;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--gold);border-color:rgba(184,134,46,.55)}
+.btn-ghost:hover{background:var(--gold-soft);border-color:var(--gold);transform:translateY(-2px)}
+.btn-sm{padding:.62rem 1.3rem;font-size:.85rem}
+
+.site-nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .5s var(--ease),box-shadow .5s,border-color .5s;
+  border-bottom:1px solid transparent}
+.site-nav.scrolled{background:rgba(12,12,22,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--line-d)}
+.site-nav nav{max-width:1360px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);height:84px;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.brand{display:flex;align-items:center}
+.brand img{height:26px;width:auto}
+.nav-links{display:flex;align-items:center;gap:2.4rem;list-style:none;margin:0}
+.nav-links a{font-size:.93rem;letter-spacing:.04em;color:rgba(247,244,237,.82);
+  transition:color .3s;position:relative;padding-block:.4rem}
+.nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.nav-links a:not(.btn):hover{color:var(--gold-2)}
+.nav-links a:not(.btn):hover::after{transform:scaleX(1);transform-origin:left}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;position:relative;z-index:110}
+.nav-toggle span{position:absolute;left:10px;width:24px;height:1.6px;background:var(--ivory);transition:all .4s var(--ease)}
+.nav-toggle span:nth-child(1){top:16px}.nav-toggle span:nth-child(2){top:22px}.nav-toggle span:nth-child(3){top:28px}
+.menu-open .nav-toggle span:nth-child(1){top:22px;transform:rotate(45deg);background:var(--gold)}
+.menu-open .nav-toggle span:nth-child(2){opacity:0}
+.menu-open .nav-toggle span:nth-child(3){top:22px;transform:rotate(-45deg);background:var(--gold)}
+
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;
+  background:radial-gradient(120% 90% at 50% 10%,#1d1d33 0%,var(--navy-2) 46%,var(--navy-3) 100%);overflow:hidden}
+#lattice{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-inner{position:relative;z-index:2;padding:7rem 1.5rem 5rem;max-width:1100px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.55rem,6vw,5.15rem);
+  line-height:1.14;letter-spacing:-.015em;color:var(--ivory)}
+.hero h1 .line{display:block;overflow:hidden;padding-block:.06em}
+.hero h1 .line>span{display:block}
+.anim .hero h1 .line>span{transform:translateY(112%);transition:transform 1.25s var(--ease)}
+.hero h1 .line.gold>span{color:var(--gold-2);transition-delay:.28s}
+.anim.loaded .hero h1 .line>span{transform:translateY(0)}
+.hero-rule{width:min(280px,50%);height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:2.6rem auto 0}
+.anim .hero-rule{width:0;transition:width 1.4s var(--ease) .9s}
+.anim.loaded .hero-rule{width:min(280px,50%)}
+.scroll-cue{position:absolute;bottom:2.4rem;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.8rem;font-size:.68rem;
+  letter-spacing:.34em;text-transform:uppercase;color:rgba(247,244,237,.55);transition:color .3s}
+.scroll-cue:hover{color:var(--gold-2)}
+.scroll-cue i{width:1px;height:56px;background:rgba(247,244,237,.22);position:relative;overflow:hidden;display:block}
+.scroll-cue i::after{content:"";position:absolute;top:-40%;left:0;width:100%;height:40%;
+  background:var(--gold);animation:cue 2.4s var(--ease) infinite}
+@keyframes cue{0%{top:-40%}60%,100%{top:110%}}
+</style>
+<style>
+.manifesto{background:linear-gradient(180deg,var(--navy-3) 0%,var(--navy) 30%,var(--navy) 100%)}
+.manifesto .narrow{padding-block:clamp(7rem,13vw,11rem)}
+.manifesto p{font-family:var(--serif);font-size:clamp(1.42rem,2.65vw,2.3rem);line-height:1.58;
+  color:rgba(247,244,237,.92);margin-bottom:2.2em;font-weight:400}
+.manifesto p:last-child{margin-bottom:0}
+.manifesto .peak{color:var(--gold-2);font-weight:700}
+.manifesto-mark{width:54px;height:32px;margin-bottom:3.2rem;opacity:.9}
+
+.reveal-sec{background:var(--ivory);color:var(--ink)}
+.reveal-sec .pad{padding-block:clamp(6rem,10vw,8.5rem)}
+.reveal-lead{font-family:var(--serif);font-size:clamp(1.65rem,3.1vw,2.6rem);line-height:1.42;
+  letter-spacing:-.01em;max-width:26ch}
+.reveal-sub{margin-top:2.6rem;padding-top:2.2rem;border-top:1px solid var(--line-l);
+  font-size:1.13rem;color:var(--mut);max-width:58ch;display:flex;gap:1rem;align-items:flex-start}
+.reveal-sub svg{flex:none;margin-top:.3rem}
+
+.pillars{background:var(--ivory);padding-bottom:var(--pad)}
+.pillars-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:1.5rem;margin-bottom:3.6rem}
+.pillars-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.6vw,2.9rem);
+  line-height:1.2;letter-spacing:-.01em;max-width:18ch}
+.lifecycle{display:flex;align-items:center;gap:.7rem;font-size:.78rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--mut)}
+.lifecycle b{color:var(--gold);font-weight:700}
+.lifecycle i{width:1.4rem;height:1px;background:var(--gold);opacity:.6;font-style:normal}
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+.pillar{background:#fff;border:1px solid var(--line-l);border-radius:3px;padding:2.7rem 2.3rem 2.5rem;
+  display:flex;flex-direction:column;position:relative;overflow:hidden;
+  transition:transform .55s var(--ease),box-shadow .55s var(--ease),border-color .55s}
+.pillar::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2));transform:scaleX(0);
+  transform-origin:left;transition:transform .6s var(--ease)}
+.pillar:hover{transform:translateY(-8px);border-color:rgba(184,134,46,.4);
+  box-shadow:0 30px 60px -30px rgba(26,26,46,.28)}
+.pillar:hover::before{transform:scaleX(1)}
+.pillar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.4rem}
+.pillar-num{font-family:var(--serif);font-size:.95rem;color:var(--gold);letter-spacing:.1em}
+.pillar-stage{font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.pillar-icon{width:52px;height:52px;margin-bottom:2rem;color:var(--gold)}
+.pillar-icon svg{width:100%;height:100%}
+.pillar h3{font-family:var(--serif);font-weight:400;font-size:1.62rem;letter-spacing:-.01em;margin-bottom:.55rem;color:var(--ink)}
+.pillar-pos{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.08rem;margin-bottom:1.2rem}
+.pillar p{color:var(--mut);font-size:1rem;line-height:1.72;flex:1}
+.pillar-link{margin-top:2.1rem;display:inline-flex;align-items:center;gap:.6rem;font-weight:700;
+  font-size:.93rem;letter-spacing:.05em;color:var(--navy);transition:color .3s}
+.pillar-link .arr{color:var(--gold);transition:transform .38s var(--ease)}
+.pillar-link:hover{color:var(--gold)}
+.pillar-link:hover .arr{transform:translateX(6px)}
+.pillars-note{margin-top:3.8rem;text-align:center;font-family:var(--serif);font-style:italic;
+  font-size:clamp(1.15rem,2vw,1.4rem);color:var(--ink)}
+.pillars-note::before{content:"";display:block;width:64px;height:1px;background:var(--gold);margin:0 auto 2.1rem;opacity:.7}
+
+.how{background:var(--ivory-2);color:var(--ink)}
+.how h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.6vw,2.9rem);
+  letter-spacing:-.01em;margin-bottom:4.2rem;max-width:22ch;line-height:1.2}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:2.2rem;position:relative}
+.steps::before{content:"";position:absolute;top:26px;left:3%;width:94%;height:1px;background:var(--line-l)}
+.steps::after{content:"";position:absolute;top:26px;left:3%;width:94%;height:1px;background:var(--gold);z-index:0}
+.anim .steps::after{transform:scaleX(0);transform-origin:left;transition:transform 2s var(--ease) .3s}
+.anim .steps.draw::after{transform:scaleX(1)}
+.step{position:relative;padding-top:4.4rem}
+.step-num{position:absolute;top:0;left:0;width:53px;height:53px;border-radius:50%;background:var(--ivory-2);
+  border:1px solid rgba(184,134,46,.5);display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);color:var(--gold);font-size:1.05rem;z-index:1;transition:background .4s,box-shadow .4s}
+.step:hover .step-num{background:var(--gold-soft);box-shadow:0 0 0 6px rgba(184,134,46,.08)}
+.step h3{font-family:var(--serif);font-weight:400;font-size:1.28rem;line-height:1.35;margin-bottom:.8rem;letter-spacing:-.01em}
+.step p{color:var(--mut);font-size:.98rem;line-height:1.7}
+
+.proof{background:var(--navy);color:var(--ivory)}
+.proof .band{border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d)}
+.proof-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:3.4rem}
+.proof h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.4vw,2.7rem);letter-spacing:-.01em}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.stat{border:1px dashed rgba(184,134,46,.45);border-radius:3px;padding:2.1rem 1.7rem 1.8rem;
+  background:rgba(247,244,237,.02)}
+.stat-num{display:block;font-family:var(--serif);font-size:clamp(2.4rem,4vw,3.3rem);color:rgba(247,244,237,.34);line-height:1}
+.stat-label{display:block;margin-top:1rem;font-size:.95rem;color:rgba(247,244,237,.78);line-height:1.5}
+.stat-tag{display:inline-block;margin-top:1.1rem;font-size:.64rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-2);border:1px solid rgba(184,134,46,.4);border-radius:2px;padding:.28rem .6rem}
+.proof-note{margin-top:2.4rem;font-size:.86rem;color:rgba(247,244,237,.5);max-width:70ch}
+
+.voices{background:var(--ivory);color:var(--ink)}
+.voices h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.4vw,2.7rem);letter-spacing:-.01em;margin-bottom:3.2rem}
+.quote-card{background:#fff;border:1px solid var(--line-l);border-left:3px solid var(--gold);border-radius:3px;
+  padding:clamp(2.2rem,4.5vw,3.6rem);max-width:880px}
+.quote-card blockquote{font-family:var(--serif);font-size:clamp(1.25rem,2.2vw,1.7rem);line-height:1.55;color:var(--mut);font-style:italic}
+.quote-card figcaption{margin-top:2rem;display:flex;align-items:center;gap:1rem;font-size:.95rem;color:var(--ink)}
+.quote-card figcaption b{font-family:var(--serif);font-weight:400;font-size:1.05rem}
+.quote-card figcaption span{color:var(--mut)}
+.avatar{width:46px;height:46px;border-radius:50%;background:var(--navy);color:var(--gold-2);
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1rem;flex:none}
+
+.circle-sec{background:radial-gradient(90% 100% at 80% 0%,#1e1e34 0%,var(--navy-2) 55%,var(--navy-3) 100%);color:var(--ivory);overflow:hidden;position:relative}
+.circle-sec .bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.52;pointer-events:none}
+.circle-sec .wrap{position:relative;z-index:1}
+.circle-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(3rem,6vw,6rem);align-items:center}
+.circle-sec h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,4.4vw,3.5rem);
+  letter-spacing:-.015em;line-height:1.15;margin-bottom:1.6rem}
+.circle-sec .lede{color:rgba(247,244,237,.78);font-size:1.12rem;max-width:52ch;margin-bottom:2.4rem}
+.tier-names{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;margin-bottom:1.1rem}
+.tier-names span{font-family:var(--serif);font-size:1.02rem;color:var(--gold-2);letter-spacing:.02em;
+  display:flex;align-items:center;gap:.55rem}
+.tier-names span::before{content:"";width:5px;height:5px;background:var(--gold);transform:rotate(45deg);opacity:.8}
+.tier-note{font-size:.78rem;color:rgba(247,244,237,.45);letter-spacing:.04em}
+.count-card{border:1px solid rgba(184,134,46,.35);border-radius:3px;background:rgba(12,12,22,.45);
+  backdrop-filter:blur(8px);padding:clamp(2.2rem,4vw,3.2rem);text-align:center;position:relative;overflow:hidden}
+.count-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.count-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(247,244,237,.6);margin-bottom:.9rem}
+.count-date{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2rem);color:var(--gold-2);margin-bottom:2.2rem}
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:2.4rem}
+.count-cell{background:rgba(247,244,237,.04);border:1px solid var(--line-d);border-radius:3px;padding:1.1rem .4rem}
+.count-cell b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.2vw,2.5rem);
+  line-height:1;color:var(--ivory);font-variant-numeric:tabular-nums}
+.count-cell span{display:block;margin-top:.55rem;font-size:.64rem;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(247,244,237,.5)}
+.count-actions{display:flex;flex-direction:column;gap:.8rem}
+.count-actions .btn{justify-content:center}
+
+.cta{background:linear-gradient(180deg,var(--navy-3),var(--navy));color:var(--ivory);text-align:center;overflow:hidden}
+.cta .lattice-bg{position:absolute;inset:0;opacity:.5;pointer-events:none}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,4.6vw,3.6rem);
+  letter-spacing:-.015em;margin-bottom:2.8rem}
+.cta-doors{display:flex;flex-wrap:wrap;justify-content:center;gap:1.1rem;position:relative;z-index:1}
+
+footer{background:var(--navy-3);color:rgba(247,244,237,.72);border-top:1px solid var(--line-d)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:clamp(2.5rem,5vw,4.5rem);
+  padding-block:clamp(4rem,7vw,6rem)}
+.foot-brand img{width:150px;height:auto;margin-bottom:1.6rem}
+.foot-brand p{font-size:.95rem;line-height:1.75;color:rgba(247,244,237,.6);max-width:34ch}
+.foot-col h4{font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:1.5rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.foot-col a{font-size:.95rem;color:rgba(247,244,237,.72);transition:color .3s}
+.foot-col a:hover{color:var(--gold-2)}
+.foot-loc{font-size:.95rem;line-height:1.8;color:rgba(247,244,237,.72)}
+.foot-loc span{display:block;font-size:.82rem;color:rgba(247,244,237,.45);margin-top:.3rem}
+.news-form{display:flex;margin-top:1.4rem;border:1px solid var(--line-d);border-radius:2px;overflow:hidden}
+.news-form input{flex:1;min-width:0;background:rgba(247,244,237,.04);border:0;color:var(--ivory);
+  padding:.8rem 1rem;font-family:var(--sans);font-size:.92rem}
+.news-form input::placeholder{color:rgba(247,244,237,.4)}
+.news-form button{background:var(--gold);color:#10101E;border:0;padding:0 1.2rem;font-weight:700;
+  font-family:var(--sans);font-size:.88rem;cursor:pointer;transition:background .3s}
+.news-form button:hover{background:var(--gold-2)}
+.foot-bottom{border-top:1px solid var(--line-d);padding-block:1.8rem;display:flex;flex-wrap:wrap;
+  align-items:center;justify-content:space-between;gap:1.2rem;font-size:.85rem;color:rgba(247,244,237,.45)}
+.foot-legal{display:flex;gap:1.8rem}
+.foot-legal a{transition:color .3s}
+.foot-legal a:hover{color:var(--gold-2)}
+.socials{display:flex;gap:1rem}
+.socials a{width:38px;height:38px;border:1px solid var(--line-d);border-radius:50%;display:flex;
+  align-items:center;justify-content:center;color:rgba(247,244,237,.65);transition:all .35s var(--ease)}
+.socials a:hover{border-color:var(--gold);color:var(--gold-2);transform:translateY(-3px)}
+.socials svg{width:16px;height:16px}
+</style>
+<style>
+@media (max-width:1020px){
+  .pillar-grid{grid-template-columns:1fr;max-width:560px;margin-inline:auto}
+  .steps{grid-template-columns:repeat(2,1fr);gap:2.8rem 2.2rem}
+  .steps::before,.steps::after{display:none}
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
+  .circle-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .nav-toggle{display:block}
+  .nav-links{position:fixed;inset:0;background:rgba(12,12,22,.97);backdrop-filter:blur(18px);
+    flex-direction:column;justify-content:center;gap:2.6rem;transform:translateY(-102%);
+    transition:transform .55s var(--ease);z-index:105}
+  .menu-open .nav-links{transform:translateY(0)}
+  .nav-links a{font-size:1.35rem;font-family:var(--serif)}
+  .nav-links .btn{font-family:var(--sans);font-size:1rem}
+  .steps{grid-template-columns:1fr}
+  .proof-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:2.6rem}
+  .count-grid{grid-template-columns:repeat(4,1fr);gap:.5rem}
+  .hero h1{font-size:clamp(2.2rem,9.4vw,3.2rem)}
+  .cta-doors .btn{width:100%;justify-content:center}
+  .cta-doors{flex-direction:column;align-items:stretch;max-width:380px;margin-inline:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .anim .reveal{opacity:1;transform:none;filter:none}
+  .anim .hero h1 .line>span{transform:none}
+  .anim .hero-rule{width:min(280px,50%)}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-nav" id="siteNav">
+  <nav aria-label="Primary">
+    <a class="brand" href="#top" aria-label="eHive — home">
+      <img src="assets/ehive-wordmark.png" alt="eHive" width="146" height="26">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navMenu">
+      <!-- Nav targets are on-page anchors for this design review; they become
+           real routes (/business-setup, /consulting, /circle) at Stage 5. -->
+      <li><a href="business-setup.html">Business Setup</a></li>
+      <li><a href="consulting.html">Consulting</a></li>
+      <li><a href="circle.html">eHive Circle</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a class="btn btn-primary btn-sm" href="get-started.html">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ================= HERO (blueprint 2.1) ================= -->
+<section class="hero" id="top" aria-label="eHive — introduction">
+  <canvas id="lattice" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <h1>
+      <span class="line"><span>Every successful business has one thing in common.</span></span>
+      <span class="line gold"><span>It doesn&rsquo;t grow alone.</span></span>
+    </h1>
+    <div class="hero-rule" aria-hidden="true"></div>
+  </div>
+  <a class="scroll-cue" href="#manifesto"><span>Scroll</span><i aria-hidden="true"></i></a>
+</section>
+
+<!-- ================= MANIFESTO (blueprint 2.2) ================= -->
+<section class="manifesto" id="manifesto" aria-labelledby="manifesto-h">
+  <h2 class="visually-hidden" id="manifesto-h">The eHive belief</h2>
+  <div class="narrow">
+    <svg class="manifesto-mark reveal" viewBox="0 0 54 32" fill="none" aria-hidden="true">
+      <path d="M2 16h14M38 16h14" stroke="#B8862E" stroke-width="1"/>
+      <path d="M27 4l10 6v12l-10 6-10-6V10z" stroke="#B8862E" stroke-width="1"/>
+      <circle cx="27" cy="16" r="2.4" fill="#B8862E"/>
+    </svg>
+    <p class="reveal">Growth happens when the right people, the right ideas, and the right opportunities come together in one place.</p>
+    <p class="reveal" style="--d:.12s">That&rsquo;s the vision behind eHive — an entrepreneurial ecosystem where businesses connect with experts, investors, mentors, partners, technology, and a community that helps them move forward.</p>
+    <p class="reveal" style="--d:.24s">When every connection creates another opportunity, growth isn&rsquo;t just possible — it becomes exponential.</p>
+    <p class="reveal peak" style="--d:.36s">Because success is built on collaboration, not competition.</p>
+  </div>
+</section>
+
+<!-- ================= REVEAL (blueprint 2.3) ================= -->
+<section class="reveal-sec" id="reveal" aria-labelledby="reveal-h">
+  <div class="wrap pad">
+    <p class="eyebrow reveal">What eHive is</p>
+    <h2 class="visually-hidden" id="reveal-h">What eHive is</h2>
+    <p class="reveal-lead reveal" style="--d:.1s">eHive is more than a business community. It&rsquo;s where ambition meets opportunity, where collaboration creates momentum, and where businesses are built for the future.</p>
+    <p class="reveal-sub reveal" style="--d:.22s">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1l7 4v8l-7 4-7-4V5z" stroke="#B8862E" stroke-width="1.2"/><circle cx="9" cy="9" r="1.6" fill="#B8862E"/></svg>
+      One ecosystem. Everything a business needs to start, run, scale — and when the time comes, exit.
+    </p>
+  </div>
+</section>
+
+<!-- ================= THREE PILLARS (blueprint 2.4) ================= -->
+<section class="pillars light" id="pillars" aria-labelledby="pillars-h">
+  <div class="wrap">
+    <div class="pillars-head">
+      <div>
+        <p class="eyebrow reveal">The architecture</p>
+        <h2 class="reveal" style="--d:.1s" id="pillars-h">Three pillars. One system.</h2>
+      </div>
+      <p class="lifecycle reveal" style="--d:.2s" aria-label="Mapped to the entrepreneur lifecycle">
+        <b>Start</b><i></i>Run<i></i><b>Scale</b><i></i>Exit
+      </p>
+    </div>
+    <div class="pillar-grid">
+      <article class="pillar reveal" style="--d:.05s">
+        <div class="pillar-top"><span class="pillar-num">01</span><span class="pillar-stage">Start</span></div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M26 6l16 9.2v18.4L26 42.8 10 33.6V15.2z"/>
+            <path d="M6 46h40M12 46V33.6M40 46V33.6" opacity=".65"/>
+            <circle cx="26" cy="24" r="2.2" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3>Business Setup</h3>
+        <p class="pillar-pos">Start on solid ground.</p>
+        <p>Company formation, licensing, visas, and the operational infrastructure to get from idea to incorporated — powered by Emirates First, delivered under one roof.</p>
+        <!-- PLACEHOLDER: links to /business-setup once that page is built (Stage 4) -->
+        <a class="pillar-link" href="business-setup.html">Explore Business Setup <span class="arr">→</span></a>
+      </article>
+      <article class="pillar reveal" style="--d:.17s">
+        <div class="pillar-top"><span class="pillar-num">02</span><span class="pillar-stage">Run · Scale</span></div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="26" cy="26" r="18"/>
+            <path d="M26 10l9.6 16H16.4z"/>
+            <circle cx="26" cy="26" r="2.2" fill="currentColor" stroke="none"/>
+            <path d="M26 44v-6M44 26h-6" opacity=".65"/>
+          </svg>
+        </div>
+        <h3>Consulting</h3>
+        <p class="pillar-pos">Run and scale with rigor.</p>
+        <p>Six proprietary consulting products, from a three-hour clarity sprint to a 90-day growth engagement — the strategic thinking of a top consultancy, the creative process of a design studio.</p>
+        <!-- PLACEHOLDER: links to /consulting once that page is built (Stage 4) -->
+        <a class="pillar-link" href="consulting.html">Explore Consulting <span class="arr">→</span></a>
+      </article>
+      <article class="pillar reveal" style="--d:.29s">
+        <div class="pillar-top"><span class="pillar-num">03</span><span class="pillar-stage">Belong</span></div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M26 8l9 5.2v10.4l-9 5.2-9-5.2V13.2z"/>
+            <path d="M13 30l7 4v8l-7 4-7-4v-8zM39 30l7 4v8l-7 4-7-4v-8z" opacity=".8"/>
+            <circle cx="26" cy="18.4" r="2" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3>eHive Circle</h3>
+        <p class="pillar-pos">Never build alone.</p>
+        <p>A membership community of founders, mentors, experts, and investors — the people who open doors, share what they&rsquo;ve learned, and grow alongside you.</p>
+        <a class="pillar-link" href="circle.html">Explore eHive Circle <span class="arr">→</span></a>
+      </article>
+    </div>
+    <p class="pillars-note reveal">Three pillars. One ecosystem. Move between them as your business grows.</p>
+  </div>
+</section>
+<!-- ================= HOW IT WORKS (blueprint 2.5) ================= -->
+<section class="how" id="how" aria-labelledby="how-h">
+  <div class="wrap pad">
+    <p class="eyebrow reveal">The process</p>
+    <h2 class="reveal" style="--d:.1s" id="how-h">How it works</h2>
+    <ol class="steps" id="steps">
+      <li class="step reveal" style="--d:.05s">
+        <span class="step-num" aria-hidden="true">1</span>
+        <h3>Tell us where you are.</h3>
+        <p>A short intake — starting up, running and needing clarity, or looking to join a community of peers.</p>
+      </li>
+      <li class="step reveal" style="--d:.15s">
+        <span class="step-num" aria-hidden="true">2</span>
+        <h3>We match you to the right door.</h3>
+        <p>Business Setup for formation and licensing. Consulting for a specific sprint. Circle for belonging and network.</p>
+      </li>
+      <li class="step reveal" style="--d:.25s">
+        <span class="step-num" aria-hidden="true">3</span>
+        <h3>You book directly.</h3>
+        <p>Real dates, real pricing where possible, no back-and-forth for standard engagements.</p>
+      </li>
+      <li class="step reveal" style="--d:.35s">
+        <span class="step-num" aria-hidden="true">4</span>
+        <h3>You keep going.</h3>
+        <p>Most founders end up using more than one pillar over time — that&rsquo;s the design, not an upsell.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= PROOF / RESULTS (blueprint 2.6) =================
+     PLACEHOLDER SECTION: no real figures exist yet. Slots below are
+     structural only — do not populate with invented numbers.
+     Decision pending (blueprint open item 8): researched third-party
+     stats at launch vs. hold until real member/client data exists. -->
+<section class="proof" id="proof" aria-labelledby="proof-h">
+  <div class="band">
+    <div class="wrap pad">
+      <div class="proof-head">
+        <div>
+          <p class="eyebrow reveal">Proof</p>
+          <h2 class="reveal" style="--d:.1s" id="proof-h">Results, as they happen.</h2>
+        </div>
+      </div>
+      <div class="proof-grid">
+        <div class="stat reveal" style="--d:.05s">
+          <span class="stat-num">—</span>
+          <span class="stat-label">Founding Circle members</span>
+          <span class="stat-tag">Placeholder</span>
+        </div>
+        <div class="stat reveal" style="--d:.13s">
+          <span class="stat-num">—</span>
+          <span class="stat-label">Businesses formed through the ecosystem</span>
+          <span class="stat-tag">Placeholder</span>
+        </div>
+        <div class="stat reveal" style="--d:.21s">
+          <span class="stat-num">—</span>
+          <span class="stat-label">Consulting engagements delivered</span>
+          <span class="stat-tag">Placeholder</span>
+        </div>
+        <div class="stat reveal" style="--d:.29s">
+          <span class="stat-num">—</span>
+          <span class="stat-label">Specialists in the vetted network</span>
+          <span class="stat-tag">Placeholder</span>
+        </div>
+      </div>
+      <p class="proof-note reveal">This section publishes verified figures only. The structure above is reserved
+        and will go live with real ecosystem data — or with cited third-party research on UAE SME growth,
+        pending the launch decision in the blueprint.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VOICES (blueprint 2.7) =================
+     PLACEHOLDER: founder statement from Jamad & Shaheen ("why we built
+     this") to be supplied. No client testimonials exist yet — none are
+     fabricated here. -->
+<section class="voices" id="voices" aria-labelledby="voices-h">
+  <div class="wrap pad">
+    <p class="eyebrow reveal">Voices</p>
+    <h2 class="reveal" style="--d:.1s" id="voices-h">From the founders.</h2>
+    <figure class="quote-card reveal" style="--d:.2s">
+      <blockquote>
+        [ Placeholder — a short statement from Jamad and Shaheen on why eHive exists.
+        Copy to be supplied by the founders before launch. Real member and client
+        voices join this section as they emerge post-launch. ]
+      </blockquote>
+      <figcaption>
+        <span class="avatar" aria-hidden="true">eH</span>
+        <div><b>Jamad &amp; Shaheen</b><br><span>Founders, eHive</span></div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= CIRCLE TEASER (blueprint 2.8) ================= -->
+<section class="circle-sec" id="circle" aria-labelledby="circle-h">
+  <img class="bg-img" src="assets/img/img-circle.jpg" alt="" aria-hidden="true">
+  <div class="wrap pad">
+    <div class="circle-grid">
+      <div>
+        <p class="eyebrow reveal">eHive Circle</p>
+        <h2 class="reveal" style="--d:.1s" id="circle-h">Never build alone.</h2>
+        <p class="lede reveal" style="--d:.2s">A membership community of founders, mentors, experts, and
+          investors — a tribe with tiers, where every tier is a home, not a waiting room for the next one.</p>
+        <!-- NOTE: tier names below are working titles, pending trademark clearance. -->
+        <div class="tier-names reveal" style="--d:.3s" aria-label="Membership tiers (working titles)">
+          <span>Horizon</span><span>Ascent</span><span>Vanguard</span><span>Zenith</span>
+        </div>
+        <p class="tier-note reveal" style="--d:.36s">Tier names are working titles, pending trademark clearance.</p>
+      </div>
+      <div class="count-card reveal" style="--d:.2s" aria-label="Founding cohort countdown">
+        <p class="count-eyebrow">Founding cohort opens</p>
+        <p class="count-date">1 August 2026</p>
+        <div class="count-grid" id="countdown" role="timer" aria-live="off">
+          <div class="count-cell"><b id="cd-d">–</b><span>Days</span></div>
+          <div class="count-cell"><b id="cd-h">–</b><span>Hours</span></div>
+          <div class="count-cell"><b id="cd-m">–</b><span>Minutes</span></div>
+          <div class="count-cell"><b id="cd-s">–</b><span>Seconds</span></div>
+        </div>
+        <div class="count-actions">
+          <a class="btn btn-primary" href="get-started.html?door=circle">Join the waitlist</a>
+          <a class="btn btn-ghost on-dark" href="get-started.html?door=circle">Apply for Zenith <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA (blueprint 2.9) ================= -->
+<section class="cta" id="cta" aria-labelledby="cta-h">
+  <svg class="lattice-bg" viewBox="0 0 1200 420" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#B8862E" stroke-width=".7" opacity=".35">
+      <path d="M120 210 260 120 420 190 580 90 760 180 930 110 1080 200"/>
+      <path d="M180 330 340 250 520 320 700 240 890 330 1060 260"/>
+      <path d="M260 120 340 250M420 190 520 320M580 90 700 240M760 180 890 330M930 110 1060 260M120 210 180 330"/>
+    </g>
+    <g fill="#D9AE5F">
+      <circle cx="120" cy="210" r="3"/><circle cx="260" cy="120" r="4"/><circle cx="420" cy="190" r="3"/>
+      <circle cx="580" cy="90" r="4.5"/><circle cx="760" cy="180" r="3"/><circle cx="930" cy="110" r="4"/>
+      <circle cx="1080" cy="200" r="3"/><circle cx="180" cy="330" r="3"/><circle cx="340" cy="250" r="4"/>
+      <circle cx="520" cy="320" r="3"/><circle cx="700" cy="240" r="4"/><circle cx="890" cy="330" r="3"/>
+      <circle cx="1060" cy="260" r="3.5"/>
+    </g>
+  </svg>
+  <div class="wrap pad" style="position:relative;z-index:1">
+    <h2 class="reveal" id="cta-h">Ready to move forward?</h2>
+    <div class="cta-doors reveal" style="--d:.15s">
+      <a class="btn btn-primary" href="get-started.html?door=business">Start a Business</a>
+      <a class="btn btn-ghost on-dark" href="get-started.html?door=consulting">Book a Consulting Sprint</a>
+      <a class="btn btn-ghost on-dark" href="get-started.html?door=circle">Join the Circle</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER (blueprint 2.10) ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/ehive-full.png" alt="eHive — Build. Belong. Become." width="150">
+        <p>To advance the human race by enabling individuals and organisations to do better —
+          sustainably, relevantly, and beneficially.</p>
+      </div>
+      <div class="foot-col">
+        <h4>The Ecosystem</h4>
+        <ul>
+          <!-- PLACEHOLDER: routes pending Stage 4–5 -->
+          <li><a href="business-setup.html">Business Setup</a></li>
+          <li><a href="consulting.html">Consulting</a></li>
+          <li><a href="circle.html">eHive Circle</a></li>
+          <li><a href="#">Cost Calculator</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights — The Hive Journal</a></li>
+          <li><a href="#">Join the Network</a></li>
+          <!-- PLACEHOLDER: /login exists at Stage 6 -->
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <p class="foot-loc">Dubai, UAE<span>Expanding across the region</span></p>
+        <!-- PLACEHOLDER: newsletter signup not wired yet (Stage 5); action required -->
+        <form class="news-form" action="#" method="post" aria-label="Newsletter signup">
+          <label class="visually-hidden" for="news-email">Email address</label>
+          <input id="news-email" type="email" placeholder="Your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> eHive. All rights reserved.</span>
+      <div class="foot-legal">
+        <!-- PLACEHOLDER: legal pages pending content -->
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="socials">
+        <!-- PLACEHOLDER: social profile URLs to be supplied -->
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.16h4.52V23H.24zM8.34 8.16h4.33v2.03h.06c.6-1.14 2.08-2.34 4.28-2.34C21.6 7.85 23 10.3 23 13.98V23h-4.51v-7.96c0-1.9-.03-4.34-2.65-4.34-2.65 0-3.05 2.07-3.05 4.2V23H8.34z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  "use strict";
+  /* Mark the page as animation-capable. Until this class is present,
+     all content renders in its final visible state (no-JS safe). */
+  document.body.classList.add("anim");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- load state: hero line reveal ---- */
+  window.addEventListener("load", function(){
+    setTimeout(function(){ document.body.classList.add("loaded"); }, 120);
+  });
+  setTimeout(function(){ document.body.classList.add("loaded"); }, 1600); /* fallback */
+
+  /* ---- nav: glass background after scroll ---- */
+  var nav = document.getElementById("siteNav");
+  function onScroll(){ nav.classList.toggle("scrolled", window.scrollY > 40); }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  /* ---- mobile menu ---- */
+  var toggle = document.getElementById("navToggle");
+  toggle.addEventListener("click", function(){
+    var open = document.body.classList.toggle("menu-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.querySelectorAll(".nav-links a").forEach(function(a){
+    a.addEventListener("click", function(){
+      document.body.classList.remove("menu-open");
+      toggle.setAttribute("aria-expanded","false");
+    });
+  });
+
+  /* ---- scroll reveals ---- */
+  var ioAlive = false;
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      ioAlive = true;
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in-view"); io.unobserve(e.target); }
+      });
+    }, {threshold:.16, rootMargin:"0px 0px -6% 0px"});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    ioAlive = true;
+    reveals.forEach(function(el){ el.classList.add("in-view"); });
+  }
+
+  /* ---- how-it-works connector line ---- */
+  var steps = document.getElementById("steps");
+  if (steps && "IntersectionObserver" in window && !reduceMotion){
+    var so = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ steps.classList.add("draw"); so.disconnect(); }
+      });
+    }, {threshold:.3});
+    so.observe(steps);
+  } else if (steps){ steps.classList.add("draw"); }
+
+  /* ---- fail-safe: if the observer never fires, reveal everything ---- */
+  setTimeout(function(){
+    if (!ioAlive){
+      document.querySelectorAll(".reveal:not(.in-view)").forEach(function(el){
+        el.classList.add("in-view");
+      });
+      if (steps) steps.classList.add("draw");
+    }
+    document.body.classList.add("loaded");
+  }, 2600);
+
+  /* ---- hive lattice canvas (hero) ---- */
+  var canvas = document.getElementById("lattice");
+  var ctx = canvas.getContext("2d");
+  var W, H, DPR, nodes = [], mouse = {x:-9999, y:-9999};
+  var GOLD = "217,174,95", IVORY = "205,212,236";
+
+  function sizeCanvas(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  function seed(){
+    nodes = [];
+    var n = Math.max(36, Math.min(96, Math.round(W * H / 20000)));
+    for (var i = 0; i < n; i++){
+      var gold = Math.random() < 0.14;
+      nodes.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28,
+        r: gold ? 1.7 + Math.random() * 1.3 : 1 + Math.random() * 1.2,
+        gold: gold, pulse: Math.random() * Math.PI * 2
+      });
+    }
+  }
+  function draw(staticFrame){
+    ctx.clearRect(0, 0, W, H);
+    var LINK = Math.min(170, Math.max(110, W / 9));
+    var i, j, a, b, dx, dy, d, alpha;
+    for (i = 0; i < nodes.length; i++){
+      a = nodes[i];
+      for (j = i + 1; j < nodes.length; j++){
+        b = nodes[j];
+        dx = a.x - b.x; dy = a.y - b.y;
+        d = Math.sqrt(dx*dx + dy*dy);
+        if (d < LINK){
+          alpha = (1 - d / LINK) * ((a.gold && b.gold) ? .5 : .22);
+          ctx.strokeStyle = "rgba(" + ((a.gold || b.gold) ? GOLD : IVORY) + "," + alpha.toFixed(3) + ")";
+          ctx.lineWidth = .7;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    for (i = 0; i < nodes.length; i++){
+      a = nodes[i];
+      var boost = 0;
+      dx = a.x - mouse.x; dy = a.y - mouse.y; d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 170){
+        boost = (1 - d / 170);
+        if (!staticFrame){ a.x += dx / d * boost * .35; a.y += dy / d * boost * .35; }
+      }
+      var glow = a.gold ? .85 : .5;
+      var rr = a.r + Math.sin(a.pulse) * .35 + boost * 1.6;
+      if (a.gold){
+        ctx.shadowColor = "rgba(" + GOLD + ",.9)"; ctx.shadowBlur = 10 + boost * 14;
+      }
+      ctx.fillStyle = "rgba(" + (a.gold ? GOLD : IVORY) + "," + (glow + boost * .4).toFixed(3) + ")";
+      ctx.beginPath(); ctx.arc(a.x, a.y, Math.max(rr, .4), 0, Math.PI * 2); ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+  function tick(){
+    for (var i = 0; i < nodes.length; i++){
+      var a = nodes[i];
+      a.x += a.vx; a.y += a.vy; a.pulse += .015;
+      if (a.x < -20) a.x = W + 20; if (a.x > W + 20) a.x = -20;
+      if (a.y < -20) a.y = H + 20; if (a.y > H + 20) a.y = -20;
+    }
+    draw(false);
+    requestAnimationFrame(tick);
+  }
+  function initLattice(){
+    sizeCanvas(); seed();
+    if (reduceMotion){ draw(true); return; }
+    tick();
+  }
+  var resizeT;
+  window.addEventListener("resize", function(){
+    clearTimeout(resizeT);
+    resizeT = setTimeout(function(){ sizeCanvas(); seed(); if (reduceMotion) draw(true); }, 180);
+  });
+  document.querySelector(".hero").addEventListener("pointermove", function(e){
+    var r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  });
+  document.querySelector(".hero").addEventListener("pointerleave", function(){
+    mouse.x = -9999; mouse.y = -9999;
+  });
+  initLattice();
+
+  /* ---- founding cohort countdown: 1 Aug 2026, 00:00 Gulf Standard Time (UTC+4) ---- */
+  var target = Date.UTC(2026, 6, 31, 20, 0, 0); /* = 2026-08-01T00:00:00+04:00 */
+  var elD = document.getElementById("cd-d"), elH = document.getElementById("cd-h"),
+      elM = document.getElementById("cd-m"), elS = document.getElementById("cd-s");
+  function pad(n){ return String(n).padStart(2, "0"); }
+  function countdown(){
+    var diff = target - Date.now();
+    if (diff <= 0){
+      document.querySelector(".count-date").textContent = "The founding cohort is now open";
+      elD.textContent = "0"; elH.textContent = "0"; elM.textContent = "0"; elS.textContent = "0";
+      return;
+    }
+    elD.textContent = Math.floor(diff / 864e5);
+    elH.textContent = pad(Math.floor(diff / 36e5) % 24);
+    elM.textContent = pad(Math.floor(diff / 6e4) % 60);
+    elS.textContent = pad(Math.floor(diff / 1e3) % 60);
+    setTimeout(countdown, 1000);
+  }
+  countdown();
+
+  /* ---- footer year ---- */
+  /* ---- newsletter capture (Stage 5: placeholder endpoint — wires to ESP at go-live) ---- */
+  document.querySelectorAll(".news-form, .sub-form").forEach(function(f){
+    f.addEventListener("submit", function(e){
+      e.preventDefault();
+      var inp = f.querySelector('input[type="email"]');
+      if (!inp || !/.+@.+\..+/.test(inp.value.trim())){ if (inp) inp.focus(); return; }
+      f.innerHTML = '<p style="margin:0;color:var(--gold-2);font-size:.92rem">You\u2019re on the list — watch your inbox.</p>';
+    });
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
